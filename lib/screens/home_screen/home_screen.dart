@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.only(left: 24, right: 100),
       child: Text(
-        'Selamat Datang di Sittok',
+        'Best furniture for your home',
         style: TextStyle(
           fontSize: 26,
           fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             fillColor: Colors.white,
-            hintText: 'Cari Barang',
+            hintText: 'Search furniture',
             prefixIcon: const Icon(FontAwesomeIcons.magnifyingGlass),
           ),
         ),
@@ -113,12 +113,12 @@ class HomeScreen extends StatelessWidget {
                   const Categories(),
                   const SizedBox(height: 24),
                   const Products(
-                    title: 'Populer',
+                    title: 'Popular',
                     productType: ProductType.popular,
                   ),
                   const SizedBox(height: 24),
                   const Products(
-                    title: 'Produk Baru',
+                    title: 'New Arrivals',
                     productType: ProductType.newArrivals,
                   ),
                   const SizedBox(height: 40),
