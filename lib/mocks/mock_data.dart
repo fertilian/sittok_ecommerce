@@ -10,14 +10,12 @@ class MockData {
   static final _products = [
     Product(
       id: 1,
-      name: 'Oasis',
+      name: 'Charger Asus',
       description:
-          "The Oasis chair is the perfect spot to kick back and unwind after a "
-          "long day. Its supportive backrest cradles your body as you sink into "
-          "the chair, providing the ultimate in comfort and support. Whether "
-          "you're watching TV, reading a book, or just lounging around, this "
-          "chair is the perfect place to relax and let go of all your stress. "
-          "So why wait? Get ready to sink into pure bliss with our Oasis chair.",
+          "Adaptor laptop ASUS A456U DC output 19V 3.42A "
+          "65Watt DC connector 4.0 * 1.35 mm (sedikit lebih kecil drpd yg standard 5.5*2.5mm) "
+          "Kualitas : Original "
+          "Garansi : 3 Bulan",
       price: 54.99,
       imageName: "chair_1",
       width: "53.8 cm",
@@ -26,13 +24,16 @@ class MockData {
     ),
     Product(
       id: 2,
-      name: 'Harmony',
+      name: 'Fan CR-1200',
       description:
-          "Find inner peace in the luxurious Harmony chair. With a spacious "
-          "seat cushion and high backrest, this chair is perfect for relaxation. "
-          "Made from high-quality materials, including a sturdy wooden frame and "
-          "durable upholstery, it can withstand daily use. Use it to read, watch "
-          "TV, or just enjoy a moment of solitude.",
+          "Intel: LGA 775/1150/1151/1155/1156/1200 Untuk platform "
+          "AMD: AM4/AM3 +/AM3/AM2 +/AM2/FM2 +/FM2/FM1 "
+          "Jenis bantalan: bantalan hidrolik "
+          "Kecepatan Kipas: 900-2300RPM (± 10%) "
+          "Volume udara: 15-36CFM "
+          "Kebisingan: 20-30.5dBA "
+          "Tegangan Input: DC 12V "
+          "Ukuran: Kipas angin: 92x92x2 5mm/3.62x3.62x0.98' ",
       price: 69.99,
       imageName: "chair_2",
       width: "58.4 cm",
@@ -41,14 +42,15 @@ class MockData {
     ),
     Product(
       id: 3,
-      name: 'Ivory',
+      name: 'Meca 6',
       description:
-          "The Ivory chair is a stylish and elegant seat for any dining room. "
-          "It is made from high-quality materials, including a sturdy wooden "
-          "frame and durable upholstery, and is built to withstand daily use. "
-          "Its crisp white color adds a touch of sophistication and a modern "
-          "touch to any decor, and its versatility makes it an excellent "
-          "addition to any dining room.",
+      "MECA 6 RGB Main Feature "
+          "60% Layout Mini Keyboard "
+          "Magnetic Frame Cover "
+          "RGB LED Light "
+          "Outemu Removable Switch "
+          "Type-C Detachable "
+          "Tricolor Keycaps Combination ",
       price: 39.99,
       imageName: "chair_3",
       width: "52.1 cm",
@@ -57,13 +59,13 @@ class MockData {
     ),
     Product(
       id: 4,
-      name: 'Eclipse',
+      name: 'Mon BenQ',
       description:
-          "Experience the darkness of the night with our luxurious Eclipse "
-          "dining room chair. With its black finish and comfortable cushioned "
-          "seat, this chair is the perfect addition to any modern dining space. "
-          "Whether you're hosting a dinner party or simply enjoying a quiet meal "
-          "at home, the Eclipse chair is sure to make a statement.",
+          "Monitor Design BenQ PD2705U menghadirkan akurasi warna untuk professional desainer. "
+          "Teknologi HDR dan fitur KVM (atur dua sistem dengan satu set keyboard/ mouse) "
+          "USB-C/ Thunderbolt 3 (satu kabel untuk transmisi video/ audio/ data/ power) "
+          "DualView (tampilan desain dalam dua mode berdampingan di satu layar) "
+          "dan Hotkey Puck G2 (alat untuk mengakses setting)",
       price: 49.99,
       imageName: "chair_4",
       width: "56.7 cm",
@@ -72,14 +74,11 @@ class MockData {
     ),
     Product(
       id: 5,
-      name: 'Midnight Sky',
+      name: 'RAM HYNIX',
       description:
-          "Bring the beauty of the night sky into your living room with our "
-          "comfortable and stylish Midnight Sky chair. With its deep black "
-          "finish and plush cushioned seats, this chair is perfect for "
-          "relaxation. Whether you're curling up with a good book or simply "
-          "taking a break from the day's activities, the Midnight Sky is sure to "
-          "provide a cozy and inviting space.",
+          "READY STOCK !!"
+          "GARANSI TUKAR BARU HYNIX DDR3 8GB PC UNTUK RAM CPU PC LIFETIME WARRANTY "
+          "Bergaransi Apabila Barang Rusak bisa langsung Retur ganti dengan yang (Baru)",
       price: 89.99,
       imageName: "chair_5",
       width: "67.4 cm",

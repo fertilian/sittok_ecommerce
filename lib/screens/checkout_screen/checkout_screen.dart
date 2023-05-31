@@ -23,7 +23,7 @@ class CheckoutScreen extends StatelessWidget {
             ),
           ),
           const Text(
-            'My Cart',
+            'Keranjang',
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
