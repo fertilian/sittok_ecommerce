@@ -3,7 +3,7 @@ import 'package:ecommerce_ui/widgets/text_form_global.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
-   LoginView({Key? key}) : super(key: key);
+   LoginView ({super.key});
    final TextEditingController emailController = TextEditingController();
    final TextEditingController passwordController = TextEditingController();
 
@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
                 Container(
                   alignment: Alignment.center,
                   child: Text(
-                      'Login',
+                      'Sign In',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 35,
