@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/constants.dart';
 
 class ButtonGlobal extends StatelessWidget {
   const ButtonGlobal({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ButtonGlobal extends StatelessWidget {
         alignment: Alignment.center,
         height: 55,
         decoration: BoxDecoration(
-          color: Colors.purple,
+          color: kSecondaryColor,
           borderRadius: BorderRadius.circular(6),
           boxShadow: [
             BoxShadow(
@@ -23,8 +24,8 @@ class ButtonGlobal extends StatelessWidget {
 
           ],
         ),
-        child: Text(
-            'Sign In',
+        child: const Text(
+            'LOGIN',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w600,
