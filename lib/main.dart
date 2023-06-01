@@ -1,7 +1,7 @@
+import 'package:ecommerce_ui/screens/splash_view.dart';
 import 'package:flutter/material.dart';
-
-import 'screens/home_screen/home_screen.dart';
 import 'utils/constants.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'E-Commerce UI',
+    return GetMaterialApp(
+      title: 'SITTOK',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: kBackgroundColor,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           color: kSecondaryColor,
         ),
       ),
-      home: const HomeScreen(),
+      home: const SplashView(),
     );
   }
 }
