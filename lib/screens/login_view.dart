@@ -1,6 +1,12 @@
+import 'dart:async';
+
+import 'package:ecommerce_ui/mocks/mock_data.dart';
+import 'package:flutter/material.dart';
 import 'package:ecommerce_ui/widgets/button_global.dart';
 import 'package:ecommerce_ui/widgets/text_form_global.dart';
-import 'package:flutter/material.dart';
+import '../../utils/constants.dart';
+import 'package:get/get.dart';
+
 
 class LoginView extends StatelessWidget {
    LoginView ({super.key});
@@ -9,6 +15,9 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 2), () {
+      Get.to(MockData());
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: SafeArea(
