@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/widgets/BuyBottomNavBar.dart';
 import 'package:ecommerce_ui/widgets/BuyItemSamples.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ui/widgets/BuyAppBar.dart';
@@ -58,7 +59,7 @@ class BuyPage extends StatelessWidget {
           ),
         ],
       ),
-      //bottomNavigationBar: CartBottomNavbBar(),
+      bottomNavigationBar: BuyBottomNavBar(),
     );
   }
 }

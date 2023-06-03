@@ -17,7 +17,8 @@ class BuyItemSamples extends StatelessWidget{
             Radio(value: "",
                 groupValue: "",
                activeColor: Color(0xFF4C53A5),
-            onChanged: (Index){},
+            onChanged: (Index){
+            },
             ),
             Container(
               height: 70,
@@ -61,7 +62,7 @@ class BuyItemSamples extends StatelessWidget{
               height: 70,
               width: 70,
               margin: EdgeInsets.only(right: 15),
-              child: Image.asset("images/cod.png"),
+              child: Image.asset("images/debit.png"),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 10),
               child: Column(
@@ -69,7 +70,7 @@ class BuyItemSamples extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Cash On Delivery",
+                    "Debit",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
