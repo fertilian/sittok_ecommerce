@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/BuyScreen/BuyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -167,7 +168,7 @@ class CheckoutScreen extends StatelessWidget {
 
   Widget cost(List<Product> products) {
     final subtotal =
-        products.fold<double>(0, (value, product) => value + product.price);
+    products.fold<double>(0, (value, product) => value + product.price);
     const shipping = 24.50;
 
     return Positioned(
@@ -194,7 +195,7 @@ class CheckoutScreen extends StatelessWidget {
     );
   }
 
-  Widget checkoutButton() {
+  Widget checkoutButton(BuildContext context) {
     return Positioned(
       left: 24,
       right: 24,
@@ -205,13 +206,20 @@ class CheckoutScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(36),
           color: kSecondaryColor,
         ),
-        child: const Center(
-          child: Text(
-            'Checkout',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: kBackgroundColor,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BuyPage()),
+            );
+          },
+          child: const Center(
+            child: Text(
+              'Checkout',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: kBackgroundColor,
+              ),
             ),
           ),
         ),
@@ -228,7 +236,7 @@ class CheckoutScreen extends StatelessWidget {
         children: [
           cartItems(products),
           cost(products),
-          checkoutButton(),
+          checkoutButton(context),
           appBar(context),
         ],
       ),
