@@ -1,22 +1,35 @@
+import 'package:ecommerce_ui/navBar/navBar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../mocks/mock_data.dart';
+import '../../navBar/navBar.dart';
 import '../../utils/constants.dart';
 import '../checkout_screen/checkout_screen.dart';
 import 'components/categories.dart';
 import 'components/products.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   Widget appBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 52, 12, 0),
       child: Row(
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => NavBar(),
+                ),
+              );
+            },
             icon: const Icon(
               FontAwesomeIcons.barsStaggered,
             ),
