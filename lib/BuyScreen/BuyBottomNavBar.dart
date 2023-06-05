@@ -51,6 +51,5 @@ class BuyBottomNavBar extends StatelessWidget{
       ),
         ),
       );
-
   }
 }

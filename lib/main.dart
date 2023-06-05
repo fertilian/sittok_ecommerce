@@ -1,3 +1,5 @@
+import 'package:ecommerce_ui/BuyScreen/BuyPage.dart';
+import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ui/Screen/Welcome/welcome_screen.dart';
 import 'package:ecommerce_ui/constants.dart';
@@ -36,8 +38,11 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(30)),
               borderSide: BorderSide.none,
             ),
-          )),
+          ),
+      ),
       home: const WelcomeScreen(),
-    );
+
+
+      );
   }
 }

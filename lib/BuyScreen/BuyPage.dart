@@ -1,10 +1,12 @@
-import 'package:ecommerce_ui/widgets/BuyBottomNavBar.dart';
-import 'package:ecommerce_ui/widgets/BuyItemSamples.dart';
+import 'package:ecommerce_ui/BuyScreen/BuyBottomNavBar.dart';
+import 'package:ecommerce_ui/BuyScreen/BuyItemSamples.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_ui/widgets/BuyAppBar.dart';
+import 'package:ecommerce_ui/BuyScreen/BuyAppBar.dart';
 import 'package:flutter/rendering.dart';
 
 class BuyPage extends StatelessWidget {
+  const BuyPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
