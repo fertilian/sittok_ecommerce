@@ -30,7 +30,7 @@ class BuyPage extends StatelessWidget {
                 //decoration: BoxDecoration(
                 //borderRadius: BorderRadius.circular(10),
                 // ),
-                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 padding: EdgeInsets.all(10),
                 child: Row(children: [
                   Container(

@@ -9,6 +9,7 @@ import 'package:ecommerce_ui/constants.dart';
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key}) : super(key: key);
 
+@override
   Widget appBar(BuildContext context) {
     return Positioned(
       left: 12,

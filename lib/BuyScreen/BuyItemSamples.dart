@@ -32,7 +32,7 @@ class BuyItemSamples extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Cash On Delivery",
+                  "Bayar Ditempat / Cash On Delivery",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class BuyItemSamples extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Debit",
+                    "Transfer",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

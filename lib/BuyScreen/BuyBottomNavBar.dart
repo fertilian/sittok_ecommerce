@@ -46,7 +46,7 @@ class BuyBottomNavBar extends StatelessWidget{
                   color: Colors.white,
                 ),
               ),
-            )
+            ),
         ],
       ),
         ),
