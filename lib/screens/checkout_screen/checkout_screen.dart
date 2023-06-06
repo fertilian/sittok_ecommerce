@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../mocks/mock_data.dart';
 import '../../models/product.dart';
-import '../../utils/constants.dart';
+import 'package:ecommerce_ui/constants.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({Key? key}) : super(key: key);

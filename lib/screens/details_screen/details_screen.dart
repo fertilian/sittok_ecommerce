@@ -1,8 +1,9 @@
+import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:flutter/src/material/page.dart';
 import '../../models/product.dart';
-import '../../utils/constants.dart';
+import 'package:ecommerce_ui/constants.dart';
 
 enum IconType {
   width,
@@ -59,16 +60,26 @@ class DetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget sideButtons() {
+  Widget sideButtons(BuildContext context) {
     return Positioned(
       top: 100,
       right: 20,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(
-            FontAwesomeIcons.heart,
-            size: 28,
+        children: [
+          IconButton(
+            icon: Icon(
+              FontAwesomeIcons.heart,
+              size: 28,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavoritePage(),
+                ),
+              );
+            },
           ),
           SizedBox(height: 56),
           Icon(
@@ -249,7 +260,7 @@ class DetailsScreen extends StatelessWidget {
       body: Stack(
         children: [
           circle(),
-          sideButtons(),
+          sideButtons(context),
           content(),
           bottomBar(),
           backButton(context),

@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../mocks/mock_data.dart';
 import '../../navBar/navBar.dart';
-import '../../utils/constants.dart';
+import 'package:ecommerce_ui/constants.dart';
 import '../checkout_screen/checkout_screen.dart';
 import 'components/categories.dart';
 import 'components/products.dart';

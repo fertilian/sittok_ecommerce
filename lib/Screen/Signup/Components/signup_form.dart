@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_ui/Components/already_have_an_account_acheck.dart';
 import 'package:ecommerce_ui/constants.dart';
@@ -9,6 +10,7 @@ class SignUpForm extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -18,7 +20,6 @@ class SignUpForm extends StatelessWidget {
 
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
-            onSaved: (email) {},
             decoration: const InputDecoration(
               hintText: "Your Full Name",
               prefixIcon: Padding(

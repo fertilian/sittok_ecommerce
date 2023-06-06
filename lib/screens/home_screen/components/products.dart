@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../mocks/mock_data.dart';
 import '../../../models/product.dart';
-import '../../../utils/constants.dart';
+import 'package:ecommerce_ui/constants.dart';
 import '../../details_screen/details_screen.dart';
 
 class Products extends StatelessWidget {
