@@ -13,10 +13,57 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  _HomeScreen createState() => _HomeScreen();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreen extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  List<Widget> _fragments = [
+    const FragmentBeranda(),
+    const FragmentProduk(),
+    const FragmentFavorit(),
+    const FragmentAkun(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _fragments[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: Colors.purple),
+            label: 'Beranda',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag, color: Colors.purple),
+            label: 'Produk',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite, color: Colors.purple),
+            label: 'Favorit',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle, color: Colors.purple),
+            label: 'Akun',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FragmentBeranda extends StatelessWidget {
+  const FragmentBeranda({Key? key}) : super(key: key);
+
+  @override
   Widget appBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 52, 12, 0),
@@ -58,7 +105,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
   Widget title() {
     return const Padding(
       padding: EdgeInsets.only(left: 24, right: 100),
@@ -144,3 +190,41 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+class FragmentProduk extends StatelessWidget {
+  const FragmentProduk({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Tambahkan kode untuk tampilan produk di sini
+    return Container(
+      child: Text('Produk'),
+    );
+  }
+}
+
+class FragmentFavorit extends StatelessWidget {
+  const FragmentFavorit({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Tambahkan kode untuk tampilan favorit di sini
+    return Container(
+      child: Text('Favorit'),
+    );
+  }
+}
+
+class FragmentAkun extends StatelessWidget {
+  const FragmentAkun({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Tambahkan kode untuk tampilan akun di sini
+    return Container(
+      child: Text('Akun'),
+    );
+  }
+}
+
+
