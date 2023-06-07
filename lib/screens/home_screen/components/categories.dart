@@ -29,7 +29,7 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = ['Laptop', 'Ram', 'Monitor', 'Keyboard', 'Charger'];
+    final categories = ['All', 'Laptop', 'Ram', 'Monitor', 'Keyboard', 'Charger'];
 
     return SizedBox(
       height: 40,

@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/navBar/navBar_screen.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class LoginForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                 builder: (context) {
-                  return const HomeScreen();
+                  return HomeScreen();
                 },
                 ),
                 );

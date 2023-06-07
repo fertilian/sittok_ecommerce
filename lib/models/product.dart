@@ -1,3 +1,6 @@
+
+enum ProductCategory {  All, Laptop, Ram, Monitor, Keyboard, Charger }
+
 class Product {
   final int id;
   final String name;
@@ -7,6 +10,7 @@ class Product {
   final String width;
   final String height;
   final String weight;
+  bool isFavorite;
 
   Product({
     required this.id,
@@ -17,6 +21,7 @@ class Product {
     required this.width,
     required this.height,
     required this.weight,
+    this.isFavorite = false,
   });
 
   String get priceString => '\$${price.toStringAsFixed(2)}';

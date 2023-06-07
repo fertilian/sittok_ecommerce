@@ -1,14 +1,16 @@
 import 'package:ecommerce_ui/Akun/Akun_screen.dart';
+import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/navBar/navBar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:ecommerce_ui/models/product.dart';
 import '../../mocks/mock_data.dart';
 import '../../navBar/navBar.dart';
 import 'package:ecommerce_ui/constants.dart';
 import '../checkout_screen/checkout_screen.dart';
 import 'components/categories.dart';
 import 'components/products.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,12 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> {
   int _currentIndex = 0;
 
+  List<Product> favorites = [];
+
   List<Widget> _fragments = [
     const FragmentBeranda(),
     const FragmentProduk(),
-    const FragmentFavorit(),
+    FavoriteScreen(favorites: [],),
     const FragmentAkun(),
   ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +42,14 @@ class _HomeScreen extends State<HomeScreen> {
           setState(() {
             _currentIndex = index;
           });
+          if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => FavoriteScreen(favorites: favorites),
+              ),
+            );
+          }
         },
         items: const [
           BottomNavigationBarItem(
@@ -57,6 +70,7 @@ class _HomeScreen extends State<HomeScreen> {
           ),
         ],
       ),
+
     );
   }
 }
@@ -204,14 +218,20 @@ class FragmentProduk extends StatelessWidget {
   }
 }
 
-class FragmentFavorit extends StatelessWidget {
-  const FragmentFavorit({Key? key}) : super(key: key);
+class FavoriteScreen extends StatelessWidget {
+  final List<Product> favorites;
+
+  const FavoriteScreen({Key? key, required this.favorites}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Tambahkan kode untuk tampilan favorit di sini
-    return Container(
-      child: Text('Favorit'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Favorit'),
+      ),
+      body: Center(
+        child: Text('Favorite Count: ${favorites.length}'),
+      ),
     );
   }
 }

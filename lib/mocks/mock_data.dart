@@ -1,12 +1,30 @@
 import '../models/product.dart';
+import 'package:ecommerce_ui/controller/produk_controller.dart';
+import 'package:get/get.dart';
 
 enum ProductType {
   popular,
   newArrivals,
   cart,
+  favorite,
 }
 
 class MockData {
+  const MockData._();
+  static List<Product> _favoriteProducts = [];
+
+  static List<Product> get favoriteProducts => _favoriteProducts;
+
+  static void addToFavorites(Product product) {
+    if (!_favoriteProducts.contains(product)) {
+      _favoriteProducts.add(product);
+    }
+  }
+
+  static void removeFromFavorites(Product product) {
+    _favoriteProducts.remove(product);
+  }
+
   static final _products = [
     Product(
       id: 1,
@@ -101,6 +119,8 @@ class MockData {
         return _newArrivals;
       case ProductType.cart:
         return _cart;
+      case ProductType.favorite:
+        return _popular;
     }
   }
 
@@ -111,4 +131,6 @@ class MockData {
     final productIds = _getProductIds(productType);
     return productIds.map((id) => getProductById(id)).toList();
   }
+
+
 }

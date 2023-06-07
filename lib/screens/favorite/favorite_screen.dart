@@ -1,25 +1,27 @@
+import 'package:ecommerce_ui/models/product_size_type.dart';
 import 'package:flutter/material.dart';
-import '../../models/product.dart';
-import '../details_screen/details_screen.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:ecommerce_ui/controller/produk_controller.dart';
+import 'package:ecommerce_ui/mocks/mock_data.dart'; // Import the MockData class
+import 'package:ecommerce_ui/models/product.dart';
+class FavoriteScreen extends StatelessWidget {
 
-import 'package:flutter/material.dart';
+  final List<Product> favorites;
+  const FavoriteScreen({Key? key, required this.favorites}) : super(key: key);
 
-class FavoritePage extends StatefulWidget {
-  @override
-  _FavoritePageState createState() => _FavoritePageState();
-}
-
-class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
-    // Tambahkan tampilan dan logika halaman favorit di sini
-    return Container(
-      // Contoh tampilan sederhana
-      child: Center(
-        child: Text('Favorite Page'),
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: MockData.favoriteProducts.length,
+        itemBuilder: (context, index) {
+          final product = MockData.favoriteProducts[index];
+          return ListTile(
+            title: Text(product.name),
+            // Other product details...
+          );
+        },
       ),
     );
   }
 }
-

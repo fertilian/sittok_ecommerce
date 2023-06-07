@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/material/page.dart';
 import '../../models/product.dart';
 import 'package:ecommerce_ui/constants.dart';
+import 'package:ecommerce_ui/mocks/mock_data.dart';
 
 enum IconType {
   width,
@@ -11,13 +12,20 @@ enum IconType {
   weight,
 }
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   final Product product;
 
   const DetailsScreen({
     Key? key,
     required this.product,
   }) : super(key: key);
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+  bool isFavorite = false;
 
   Widget circle() {
     return Stack(
@@ -52,7 +60,7 @@ class DetailsScreen extends StatelessWidget {
           left: 40,
           top: 84,
           child: Image.asset(
-            product.imagePath,
+            widget.product.imagePath,
             height: 352,
           ),
         ),
@@ -69,16 +77,18 @@ class DetailsScreen extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(
-              FontAwesomeIcons.heart,
+              isFavorite ? FontAwesomeIcons.solidHeart : FontAwesomeIcons.heart,
               size: 28,
             ),
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FavoritePage(),
-                ),
-              );
+              setState(() {
+                if (isFavorite) {
+                  MockData.removeFromFavorites(widget.product);
+                } else {
+                  MockData.addToFavorites(widget.product);
+                }
+                isFavorite = !isFavorite;
+              });
             },
           ),
           SizedBox(height: 56),
@@ -150,7 +160,7 @@ class DetailsScreen extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            product.name,
+            widget.product.name,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -158,7 +168,7 @@ class DetailsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            product.description,
+            widget.product.description,
             style: const TextStyle(
               fontSize: 13,
             ),
@@ -167,9 +177,9 @@ class DetailsScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              measurementIcon(IconType.width, product.width),
-              measurementIcon(IconType.height, product.height),
-              measurementIcon(IconType.weight, product.weight),
+              measurementIcon(IconType.width, widget.product.width),
+              measurementIcon(IconType.height, widget.product.height),
+              measurementIcon(IconType.weight, widget.product.weight),
             ],
           ),
         ],
@@ -202,7 +212,7 @@ class DetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      product.priceString,
+                      widget.product.priceString,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
