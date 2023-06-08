@@ -211,9 +211,14 @@ class FragmentProduk extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Tambahkan kode untuk tampilan produk di sini
-    return Container(
-      child: Text('Produk'),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CheckoutScreen()),
+        );
+      },
+      child: CheckoutScreen(),
     );
   }
 }

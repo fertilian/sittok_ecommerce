@@ -35,7 +35,7 @@ class AkunScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: AkunBottomNavBar(),
+      //bottomNavigationBar: AkunBottomNavBar(),
     );
   }
 }

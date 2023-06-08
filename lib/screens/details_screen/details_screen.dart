@@ -1,10 +1,13 @@
 import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
+import 'package:ecommerce_ui/screens/home_screen/components/products.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/src/material/page.dart';
+import 'package:get/get.dart';
 import '../../models/product.dart';
 import 'package:ecommerce_ui/constants.dart';
 import 'package:ecommerce_ui/mocks/mock_data.dart';
+import 'package:ecommerce_ui/controller/produk_controller.dart';
 
 enum IconType {
   width,
@@ -12,8 +15,11 @@ enum IconType {
   weight,
 }
 
+final ProductController controller = Get.put(ProductController());
+
 class DetailsScreen extends StatefulWidget {
   final Product product;
+
 
   const DetailsScreen({
     Key? key,
@@ -166,6 +172,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          
+
           const SizedBox(height: 16),
           Text(
             widget.product.description,
@@ -231,7 +239,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                   color: kSecondaryColor,
                 ),
-                child: const Center(
+                child: ElevatedButton(
+                  onPressed: widget.product.isAvailable
+                  ?() => controller.addToCart(widget.product)
+                  : null,
                   child: Text(
                     'Add to cart',
                     style: TextStyle(

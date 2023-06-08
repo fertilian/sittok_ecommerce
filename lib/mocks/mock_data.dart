@@ -39,6 +39,8 @@ class MockData {
       width: "53.8 cm",
       height: "76.2 cm",
       weight: "5.8 kg",
+      isAvailable: true,
+      quantity: 0,
     ),
     Product(
       id: 2,
@@ -57,6 +59,8 @@ class MockData {
       width: "58.4 cm",
       height: "73.7 cm",
       weight: "7.4 kg",
+      isAvailable: true,
+      quantity: 0,
     ),
     Product(
       id: 3,
@@ -74,6 +78,8 @@ class MockData {
       width: "52.1 cm",
       height: "68.8 cm",
       weight: "2.6 kg",
+      isAvailable: true,
+      quantity: 0,
     ),
     Product(
       id: 4,
@@ -89,6 +95,8 @@ class MockData {
       width: "56.7 cm",
       height: "58.3 cm",
       weight: "4.4 kg",
+      isAvailable: true,
+      quantity: 0,
     ),
     Product(
       id: 5,
@@ -102,6 +110,8 @@ class MockData {
       width: "67.4 cm",
       height: "83.9 cm",
       weight: "14.8 kg",
+      isAvailable: true,
+      quantity: 0,
     ),
   ];
 
