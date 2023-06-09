@@ -21,7 +21,7 @@ class SignUpForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
             decoration: const InputDecoration(
-              hintText: "Nama Customer",
+              hintText: "Nama",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
