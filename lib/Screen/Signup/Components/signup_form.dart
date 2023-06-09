@@ -21,7 +21,7 @@ class SignUpForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
             decoration: const InputDecoration(
-              hintText: "Your Full Name",
+              hintText: "Nama",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
@@ -33,10 +33,9 @@ class SignUpForm extends StatelessWidget {
             child: TextFormField(
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.done,
-              obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                hintText: "Your Email",
+                hintText: "Email",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.mail),
@@ -48,10 +47,9 @@ class SignUpForm extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
               textInputAction: TextInputAction.done,
-              obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                hintText: "Your Phone Number",
+                hintText: "NoHp",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.phone),
@@ -66,7 +64,7 @@ class SignUpForm extends StatelessWidget {
               obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                hintText: "Your password",
+                hintText: "Password",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
@@ -86,7 +84,7 @@ class SignUpForm extends StatelessWidget {
                 ),
               );
             },
-            child: Text("Sign Up".toUpperCase()),
+            child: Text("Register".toUpperCase()),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(

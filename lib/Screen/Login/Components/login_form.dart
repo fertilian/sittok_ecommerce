@@ -1,4 +1,3 @@
-import 'package:ecommerce_ui/navBar/navBar_screen.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,7 @@ class LoginForm extends StatelessWidget {
             cursorColor: kPrimaryColor,
             onSaved: (email) {},
             decoration: const InputDecoration(
-              hintText: "Your email",
+              hintText: "Email",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
@@ -36,7 +35,7 @@ class LoginForm extends StatelessWidget {
               obscureText: true,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                hintText: "Your password",
+                hintText: "Password",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
@@ -53,7 +52,7 @@ class LoginForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                 builder: (context) {
-                  return HomeScreen();
+                  return const HomeScreen();
                 },
                 ),
                 );
