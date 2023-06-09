@@ -18,11 +18,12 @@ class AkunScreen extends StatelessWidget {
             height: 700,
             padding: EdgeInsets.only(top: 15),
             decoration: BoxDecoration(
-                color: Color(0xFFEDECF2),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(35),
-                  topRight: Radius.circular(35),
-                )),
+                color: Colors.purple,
+               // borderRadius: BorderRadius.only(
+                //  topLeft: Radius.circular(35),
+                //  topRight: Radius.circular(35),
+                //)
+      ),
             child: Column(children: [
               AkunBody(),
               Container(

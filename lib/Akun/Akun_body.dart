@@ -1,5 +1,7 @@
 
 
+import 'package:ecommerce_ui/Help/HelpCenter.dart';
+import 'package:ecommerce_ui/Screen/Login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'AkunMenu.dart';
@@ -17,12 +19,23 @@ class AkunBody extends StatelessWidget {
           AkunMenu(
             text: "Help Center",
             icon: "assets/icons/Question mark.svg",
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HelpCenter()),
+              );
+            },
           ),
 
           AkunMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
-            press: () {},
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
+            },
           ),
         ],
       ),
