@@ -24,7 +24,7 @@ class BuyItemSamples extends StatelessWidget{
               height: 70,
               width: 70,
               margin: EdgeInsets.only(right: 15),
-              child: Image.asset("images/cod.png"),
+              child: Image.asset("image/cod.png"),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 10),
             child: Column(

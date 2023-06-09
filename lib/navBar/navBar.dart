@@ -16,11 +16,11 @@ class _NavBarState extends State<NavBar> {
             accountName: const Text('cobaaa'),
             accountEmail: const Text('cobaaa@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              child: ClipOval(child: Image.asset('images/sittoklogo.png')
+              child: ClipOval(child: Image.asset('images/sittok.png')
               ),
             ),
           decoration: BoxDecoration(
-              color: Colors.purple[200],
+              color: Colors.purple,
           ),)
         ],
       ),
