@@ -1,8 +1,10 @@
+
+import 'package:ecommerce_ui/Screen/Login/Components/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ui/responsive.dart';
 
 import '../../components/background.dart';
-import 'components/login_form.dart';
+
 import 'components/login_screen_top_image.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -22,7 +24,7 @@ class LoginScreen extends StatelessWidget {
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     SizedBox(
                       width: 450,
                       child: LoginForm(),
@@ -50,7 +52,7 @@ class MobileLoginScreen extends StatelessWidget {
       children: <Widget>[
         const LoginScreenTopImage(),
         Row(
-          children: const [
+          children: [
             Spacer(),
             Expanded(
               flex: 8,
