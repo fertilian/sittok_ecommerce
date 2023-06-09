@@ -4,10 +4,8 @@ import '../../../constants.dart';
 import '../../Login/login_screen.dart';
 import '../../Signup/signup_screen.dart';
 
-class LoginAndSignupBtn extends StatelessWidget {
-  const LoginAndSignupBtn({
-    Key? key,
-  }) : super(key: key);
+class LoginAndRegisterBtn extends StatelessWidget {
+  const LoginAndRegisterBtn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class LoginAndSignupBtn extends StatelessWidget {
           style: ElevatedButton.styleFrom(
               primary: kPrimaryLightColor, elevation: 0),
           child: Text(
-            "Sign Up".toUpperCase(),
+            "Register".toUpperCase(),
             style: TextStyle(color: Colors.black),
           ),
         ),
