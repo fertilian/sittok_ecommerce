@@ -1,14 +1,25 @@
+import 'dart:convert';
+
+
+import 'package:ecommerce_ui/API/Api_connect.dart';
+import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import 'package:http/http.dart' as http;
+
 
 import 'package:ecommerce_ui/Components/already_have_an_account_acheck.dart';
 import 'package:ecommerce_ui/constants.dart';
 import 'package:ecommerce_ui/Screen/Signup/signup_screen.dart';
-
 class LoginForm extends StatelessWidget {
-  const LoginForm({
+  LoginForm({
     Key? key,
   }) : super(key: key);
+
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +30,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
-            onSaved: (email) {},
+            controller: email,
             decoration: const InputDecoration(
               hintText: "Email",
               prefixIcon: Padding(
@@ -34,6 +45,7 @@ class LoginForm extends StatelessWidget {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
+              controller: password,
               decoration: const InputDecoration(
                 hintText: "Password",
                 prefixIcon: Padding(
@@ -48,14 +60,7 @@ class LoginForm extends StatelessWidget {
             tag: "login_btn",
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) {
-                  return const HomeScreen();
-                },
-                ),
-                );
+                _handleLogin(context);
               },
               child: Text(
                 "Login".toUpperCase(),
@@ -78,5 +83,34 @@ class LoginForm extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _handleLogin(BuildContext context) async {
+    try {
+      var response = await http.post(Uri.parse(ApiConnect.login), body: {
+        "email": email.text.toString(),
+        "password": password.text.toString()
+      });
+
+      if (response.statusCode == 200) {
+        final user = Users.fromJson(jsonDecode(response.body));
+        if (user.success == true) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+        } else {
+        Fluttertoast.showToast(msg: "Gagal Login",
+        backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 12
+        );
+        }
+      } else {
+
+      }
+    } catch (e) {
+
+    }
   }
 }
