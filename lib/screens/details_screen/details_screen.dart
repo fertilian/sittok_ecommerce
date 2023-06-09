@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/screens/checkout_screen/checkout_screen.dart';
 import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/products.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,6 @@ final ProductController controller = Get.put(ProductController());
 
 class DetailsScreen extends StatefulWidget {
   final Product product;
-
 
   const DetailsScreen({
     Key? key,
@@ -97,16 +97,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
               });
             },
           ),
-          SizedBox(height: 56),
-          Icon(
-            FontAwesomeIcons.shareFromSquare,
-            size: 28,
-          ),
-          SizedBox(height: 56),
-          Icon(
-            FontAwesomeIcons.comment,
-            size: 28,
-          ),
         ],
       ),
     );
@@ -155,7 +145,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
       ),
     );
   }
-
   Widget content() {
     return Positioned(
       left: 24,
@@ -172,8 +161,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          
-
           const SizedBox(height: 16),
           Text(
             widget.product.description,
@@ -232,24 +219,36 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
             Flexible(
               flex: 3,
-              child: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                  ),
-                  color: kSecondaryColor,
-                ),
-                child: ElevatedButton(
-                  onPressed: widget.product.isAvailable
-                  ?() => controller.addToCart(widget.product)
-                  : null,
-                  child: Text(
-                    'Add to cart',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: kBackgroundColor,
+
+              // child:
+              //
+              // Container(
+              //   color: kSecondaryColor,
+              //   decoration: const BoxDecoration(
+              //     color: kSecondaryColor,
+              //     borderRadius: BorderRadius.only(
+              //       topRight: Radius.circular(50),
+              //       topLeft: Radius.circular(50),
+              //     ),
+              //   ),
+              //
+              //
+              // ),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => CheckoutScreen(),
                     ),
+                  );
+                },
+
+                child: Text(
+                  'Add to cart',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: kBackgroundColor,
                   ),
                 ),
               ),
