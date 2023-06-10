@@ -18,7 +18,9 @@ class WelcomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Expanded(
-                  child: WelcomeImage(),
+                  child: WelcomeImage(
+
+                  ),
                 ),
                 Expanded(
                   child: Row(

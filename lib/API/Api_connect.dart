@@ -3,6 +3,11 @@ class ApiConnect {
   static const connectApi ="$hostConnect/api";
 
   static const login = "$connectApi/login";
+
   static const barang = "$connectApi/getDataBarang";
   static const register = "$connectApi/";
+
+
+
+
 }
