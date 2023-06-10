@@ -95,7 +95,7 @@ class SignUpForm extends StatelessWidget {
                 hintText: "Alamat",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
-                  child: Icon(Icons.lock),
+                  child: Icon(Icons.home),
                 ),
               ),
             ),
