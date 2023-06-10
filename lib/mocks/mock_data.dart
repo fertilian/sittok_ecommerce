@@ -1,3 +1,5 @@
+import 'package:ecommerce_ui/models/model_barang.dart';
+
 import '../models/product.dart';
 import 'package:ecommerce_ui/controller/produk_controller.dart';
 import 'package:get/get.dart';

@@ -7,14 +7,15 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 class ServiceApiBarang {
-  Future<List<Barang>> getData() async {
+  Future<List<Productse>> getData() async {
     try {
       final response = await http.post(Uri.parse(ApiConnect.barang));
       if (response.statusCode == 200) {
         print(response.body);
         Iterable it = jsonDecode(response.body);
-        List<Barang> blog = it.map((e) => Barang.fromJson(e)).toList();
-        return blog;
+        List<Map<String, dynamic>> jsonData = List<Map<String, dynamic>>.from(jsonDecode(response.body));
+        List<Productse> data = it.map((e) => Productse.fromJson(e)).toList();
+        return data;
       } else {
         throw Exception('Failed to load data');
       }
@@ -24,3 +25,6 @@ class ServiceApiBarang {
     }
   }
 }
+
+
+

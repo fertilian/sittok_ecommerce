@@ -8,14 +8,15 @@ import '../../../models/product.dart';
 import 'package:ecommerce_ui/constants.dart';
 import '../../details_screen/details_screen.dart';
 
+
 class Products extends StatefulWidget {
   final String title;
-  final ProductType productType;
+  final List<Productse> data;
 
   Products({
     Key? key,
     required this.title,
-    required this.productType,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -23,21 +24,28 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  late Future<List<Data>> listblog;
-  List<Data> listViews = [];
+  late Future<List<Productse>> listblog;
+  List<Productse> listViews = [];
+
+  Future<List<Productse>> fetchData() async {
+    try {
+
+      List<Productse> data = await ServiceApiBarang().getData();
+      return data;
+    } catch (error) {
+      // Handle error jika terjadi kesalahan saat mengambil data dari API
+      print('Error fetching data: $error');
+      throw Exception('Failed to load data');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    listblog = ServiceApiBarang().getData() as Future<List<Data>>;
-    listblog.then((value) {
-      setState(() {
-        listViews = value;
-      });
-    });
+    listblog = fetchData();
   }
 
-  Widget background(Data data) {
+  Widget background(Productse barang) {
     return Container(
       height: 140,
       decoration: BoxDecoration(
@@ -54,7 +62,9 @@ class _ProductsState extends State<Products> {
     );
   }
 
-  Widget text(Data data) {
+  Widget text(Productse barang) {
+    Productse? data = barang;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -62,46 +72,57 @@ class _ProductsState extends State<Products> {
         children: [
           Row(
             children: [
-              Text(
-                data.merkBarang ?? '',
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              if (data?.merkBarang != null && data!.merkBarang!.isNotEmpty)
+                Text(
+                  data.merkBarang!,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
               const Spacer(),
-              Text(
-                data.harga.toString(),
-                style: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
+              if (data?.harga != null)
+                Text(
+                  data!.harga.toString(),
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 4),
-          Text(
-            data.deskripsi ?? '',
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 13,
-              color: kSecondaryColor.withOpacity(0.6),
+          if (data?.deskripsi != null && data!.deskripsi!.isNotEmpty)
+            Text(
+              data!.deskripsi!,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 13,
+                color: kSecondaryColor.withOpacity(0.6),
+              ),
             ),
-          ),
         ],
       ),
     );
   }
 
   Widget image(String imagePath) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12),
-      child: Image.network(
-        imagePath,
+    if (imagePath != null && imagePath.isNotEmpty) {
+      String imageUrl = "https://0a6c-180-253-160-53.ngrok-free.app$imagePath"; // Replace "your-server-link.com" with the actual server link
+      return Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: Image.network(
+          imageUrl,
+          height: 148,
+        ),
+      );
+    } else {
+      return Container(
         height: 148,
-      ),
-    );
+        color: Colors.grey, // Placeholder color or any other representation
+      );
+    }
   }
 
   Widget favoriteIcon() {
@@ -125,7 +146,10 @@ class _ProductsState extends State<Products> {
       ),
     );
   }
-  Widget productItem(BuildContext context, Data data) {
+
+  Widget productItem(BuildContext context, Productse barang) {
+    Productse? data = barang;
+
     return Stack(
       children: [
         Align(
@@ -146,14 +170,32 @@ class _ProductsState extends State<Products> {
             ),
             child: Column(
               children: [
-                background(data),
+                background(barang),
                 const SizedBox(height: 12),
-                text(data),
+                text(barang),
               ],
             ),
           ),
         ),
-        image(data.gambar ?? ''),
+        Positioned.fill(
+          child: Image.network(
+            data?.gambar ?? '',
+            height: 148,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 148,
+                color: Colors.grey,
+              );
+            },
+          ),
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: ClipRRect(
@@ -184,16 +226,15 @@ class _ProductsState extends State<Products> {
       ],
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: FutureBuilder<List<Data>>(
+      body: FutureBuilder<List<Productse>>(
         future: listblog,
-        builder: (BuildContext context, AsyncSnapshot<List<Data>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
@@ -203,16 +244,17 @@ class _ProductsState extends State<Products> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
+            List<Productse> data = snapshot.data!;
             return GridView.builder(
               padding: EdgeInsets.all(16),
-              itemCount: snapshot.data?.length ?? 0,
+              itemCount: data.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return productItem(context, snapshot.data![index]);
+                return productItem(context, data[index]);
               },
             );
           }
@@ -220,4 +262,6 @@ class _ProductsState extends State<Products> {
       ),
     );
   }
+
+
 }

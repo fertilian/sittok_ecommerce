@@ -1,3 +1,4 @@
+import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:get/get.dart';
 import '../models/product.dart';
 import 'package:ecommerce_ui/mocks/mock_data.dart';
