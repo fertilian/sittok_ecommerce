@@ -184,14 +184,14 @@ class FragmentBeranda extends StatelessWidget {
                   const SizedBox(height: 24),
                   searchBar(),
                   const SizedBox(height: 24),
-                  const Categories(),
+                  Categories(),
                   const SizedBox(height: 24),
-                  const Products(
+             Products(
                     title: 'Populer',
                     productType: ProductType.popular,
                   ),
                   const SizedBox(height: 24),
-                  const Products(
+                Products(
                     title: 'Produk Baru',
                     productType: ProductType.newArrivals,
                   ),

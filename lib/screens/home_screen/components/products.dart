@@ -1,22 +1,43 @@
+import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../API/Api_Service.dart';
 import '../../../mocks/mock_data.dart';
 import '../../../models/product.dart';
 import 'package:ecommerce_ui/constants.dart';
 import '../../details_screen/details_screen.dart';
 
-class Products extends StatelessWidget {
+class Products extends StatefulWidget {
   final String title;
   final ProductType productType;
 
-  const Products({
+  Products({
     Key? key,
     required this.title,
     required this.productType,
   }) : super(key: key);
 
-  Widget background(Product product) {
+  @override
+  _ProductsState createState() => _ProductsState();
+}
+
+class _ProductsState extends State<Products> {
+  late Future<List<Data>> listblog;
+  List<Data> listViews = [];
+
+  @override
+  void initState() {
+    super.initState();
+    listblog = ServiceApiBarang().getData() as Future<List<Data>>;
+    listblog.then((value) {
+      setState(() {
+        listViews = value;
+      });
+    });
+  }
+
+  Widget background(Data data) {
     return Container(
       height: 140,
       decoration: BoxDecoration(
@@ -33,7 +54,7 @@ class Products extends StatelessWidget {
     );
   }
 
-  Widget text(Product product) {
+  Widget text(Data data) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -42,7 +63,7 @@ class Products extends StatelessWidget {
           Row(
             children: [
               Text(
-                product.name,
+                data.merkBarang ?? '',
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -50,7 +71,7 @@ class Products extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                product.priceString,
+                data.harga.toString(),
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -60,7 +81,7 @@ class Products extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            product.description,
+            data.deskripsi ?? '',
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(
@@ -76,7 +97,7 @@ class Products extends StatelessWidget {
   Widget image(String imagePath) {
     return Padding(
       padding: const EdgeInsets.only(left: 12),
-      child: Image.asset(
+      child: Image.network(
         imagePath,
         height: 148,
       ),
@@ -104,8 +125,7 @@ class Products extends StatelessWidget {
       ),
     );
   }
-
-  Widget productItem(BuildContext context, Product product) {
+  Widget productItem(BuildContext context, Data data) {
     return Stack(
       children: [
         Align(
@@ -126,31 +146,35 @@ class Products extends StatelessWidget {
             ),
             child: Column(
               children: [
-                background(product),
+                background(data),
                 const SizedBox(height: 12),
-                text(product),
+                text(data),
               ],
             ),
           ),
         ),
-        image(product.imagePath),
+        image(data.gambar ?? ''),
         Align(
           alignment: Alignment.bottomCenter,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: SizedBox(
               width: 184,
-              height: 200,
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => DetailsScreen(product: product),
-                      ),
-                    );
-                  },
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: kPrimaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                child: Text(
+                  'Add to Cart',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -163,34 +187,37 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productList = MockData.getProducts(productType);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 24),
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        const SizedBox(height: 12),
-        SizedBox(
-          height: 220,
-          child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            clipBehavior: Clip.none,
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (_, __) => const SizedBox(width: 24),
-            itemCount: productList.length,
-            itemBuilder: (_, index) => productItem(context, productList[index]),
-          ),
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: FutureBuilder<List<Data>>(
+        future: listblog,
+        builder: (BuildContext context, AsyncSnapshot<List<Data>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            return GridView.builder(
+              padding: EdgeInsets.all(16),
+              itemCount: snapshot.data?.length ?? 0,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return productItem(context, snapshot.data![index]);
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }

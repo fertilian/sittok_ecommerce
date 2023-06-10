@@ -1,9 +1,10 @@
+import 'package:ecommerce_ui/API/Api_Service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ecommerce_ui/constants.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({Key? key}) : super(key: key);
+  Categories({Key? key}) : super(key: key);
 
   Widget categoryItem(String text, {bool isFocused = false}) {
     return Container(
@@ -28,6 +29,7 @@ class Categories extends StatelessWidget {
   }
 
   @override
+
   Widget build(BuildContext context) {
     final categories = ['All', 'Laptop', 'Ram', 'Monitor', 'Keyboard', 'Charger'];
 
