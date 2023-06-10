@@ -1,15 +1,10 @@
 import 'dart:convert';
-
-
 import 'package:ecommerce_ui/API/Api_connect.dart';
 import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:http/http.dart' as http;
-
-
 import 'package:ecommerce_ui/Components/already_have_an_account_acheck.dart';
 import 'package:ecommerce_ui/constants.dart';
 import 'package:ecommerce_ui/Screen/Signup/signup_screen.dart';
@@ -107,7 +102,11 @@ class LoginForm extends StatelessWidget {
         );
         }
       } else {
-
+        Fluttertoast.showToast(msg: "Gagal Login",
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 12
+        );
       }
     } catch (e) {
 
