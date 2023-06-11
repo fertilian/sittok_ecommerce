@@ -111,7 +111,7 @@ class _ProductsState extends State<Productsr> {
   Widget image(Productse product) {
     if (product.gambar != null) {
       String imageUrl =
-          "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString();
+          "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
       return Container(
         height: 148,
         width: 148,
@@ -133,7 +133,7 @@ class _ProductsState extends State<Productsr> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
+                  "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString(),
                 ))),
         child: text(product),
       );
@@ -144,8 +144,6 @@ class _ProductsState extends State<Productsr> {
       );
     }
   }
-
-
 
   Widget favoriteIcon() {
     return Positioned(
@@ -170,15 +168,15 @@ class _ProductsState extends State<Productsr> {
   }
   Widget productItem(BuildContext context, Productse product) {
     String imageUrl =
-        "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString();
+        "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
     return Stack(
       children: [
-
         Positioned.fill(
           child: Container(
             width: 184,
             height: 200,
             decoration: BoxDecoration(
+
                 border: Border.all(
                     width: 4,
                     color: Theme.of(context)
@@ -194,12 +192,9 @@ class _ProductsState extends State<Productsr> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
+                      "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString(),
                     ))),
-
-
             child: Column(
-
               children: [
                 background(product),
                 const SizedBox(height: 12),

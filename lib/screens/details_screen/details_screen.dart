@@ -1,4 +1,5 @@
 
+import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:ecommerce_ui/screens/checkout_screen/checkout_screen.dart';
 import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/products.dart';

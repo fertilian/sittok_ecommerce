@@ -45,14 +45,6 @@ class _HomeScreen extends State<HomeScreen> {
           setState(() {
             _currentIndex = index;
           });
-          if (index == 2) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => FavoriteScreen(favorites: favorites),
-              ),
-            );
-          }
         },
         items: const [
           BottomNavigationBarItem(
@@ -79,44 +71,47 @@ class _HomeScreen extends State<HomeScreen> {
 }
 class FragmentBeranda extends StatelessWidget {
   const FragmentBeranda({Key? key}) : super(key: key);
-  Widget appBar(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 52, 12, 0),
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => NavBar(),
-                ),
-              );
-            },
-            icon: const Icon(
-              FontAwesomeIcons.barsStaggered,
+  PreferredSizeWidget appBar(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(1), // Sesuaikan dengan ketinggian yang diinginkan
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 52, 12, 0),
+        child: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => NavBar(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                FontAwesomeIcons.barsStaggered,
+              ),
             ),
-          ),
-          const Spacer(),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              FontAwesomeIcons.solidBell,
+            const Spacer(),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                FontAwesomeIcons.solidBell,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const CheckoutScreen(),
-                ),
-              );
-            },
-            icon: const Icon(
-              FontAwesomeIcons.cartShopping,
+            const SizedBox(width: 12),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => const CheckoutScreen(),
+                  ),
+                );
+              },
+              icon: const Icon(
+                FontAwesomeIcons.cartShopping,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -157,7 +152,7 @@ class FragmentBeranda extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+    appBar: appBar(context),
       body: Padding(
         padding: const EdgeInsets.only(top: 84),
         child: ShaderMask(
@@ -176,7 +171,6 @@ class FragmentBeranda extends StatelessWidget {
           child: ListView(
             padding: const EdgeInsets.only(top: 24),
             children: [
-              appBar(context),
               title(),
               const SizedBox(height: 24),
               searchBar(),

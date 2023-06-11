@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:ecommerce_ui/Components/already_have_an_account_acheck.dart';
 import 'package:ecommerce_ui/constants.dart';
 import 'package:ecommerce_ui/Screen/Signup/signup_screen.dart';
+
+import '../../../SessionManager.dart';
 class LoginForm extends StatelessWidget {
   LoginForm({
     Key? key,
@@ -18,6 +20,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    checkLoginStatus(context);
     return Form(
       child: Column(
         children: [
@@ -78,8 +81,18 @@ class LoginForm extends StatelessWidget {
         ],
       ),
     );
-  }
 
+  }
+  void checkLoginStatus(BuildContext context) async {
+    bool isLoggedIn = await SessionManager.isLoggedIn();
+
+    if (isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    }
+  }
   Future<void> _handleLogin(BuildContext context) async {
     try {
       var response = await http.post(Uri.parse(ApiConnect.login), body: {
@@ -89,7 +102,8 @@ class LoginForm extends StatelessWidget {
 
       if (response.statusCode == 200) {
         final user = Users.fromJson(jsonDecode(response.body));
-        if (user.success == true) {
+        if (response.statusCode == 200) {
+          await SessionManager.saveUserData(user);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomeScreen()),

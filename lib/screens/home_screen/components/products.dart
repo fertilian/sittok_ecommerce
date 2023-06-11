@@ -1,11 +1,21 @@
-import 'package:ecommerce_ui/models/model_barang.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:convert';
 
+import 'package:ecommerce_ui/Screen/Login/login_screen.dart';
+import 'package:ecommerce_ui/SessionManager.dart';
+import 'package:ecommerce_ui/models/model_barang.dart';
+import 'package:ecommerce_ui/models/model_datakeranjang.dart';
+import 'package:ecommerce_ui/models/model_user.dart';
+import 'package:ecommerce_ui/screens/checkout_screen/checkout_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import '../../../API/Api_Service.dart';
 
 
 import 'package:ecommerce_ui/constants.dart';
+import '../../../API/Api_connect.dart';
 import '../../details_screen/details_screen.dart';
 
 
@@ -13,10 +23,12 @@ class Products extends StatefulWidget {
   final String title;
   final List<Productse> data;
 
+
   Products({
     Key? key,
     required this.title,
     required this.data,
+
   }) : super(key: key);
 
   @override
@@ -28,6 +40,7 @@ class _ProductsState extends State<Products> {
   List<Productse> listViews = [];
 
   Future<List<Productse>> fetchData() async {
+
     try {
       List<Productse> data = await ServiceApiBarang().getData();
       setState(() {
@@ -45,6 +58,24 @@ class _ProductsState extends State<Products> {
   void initState() {
     super.initState();
     listblog = fetchData();
+  }
+  void fetchDataAndHandleAddDataKeranjang(BuildContext context, int index) async {
+    final Users? users = await SessionManager.getUserData();
+    if (users != null && users.idCustomer != null) {
+      _handleAdddatakeranjang(context, index, users);
+    } else {
+      // Handle the scenario when user data is not available or user is not logged in
+      Fluttertoast.showToast(
+        msg: "Anda harus login terlebih dahulu",
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 12,
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
+    }
   }
 
   Widget background(Productse product) {
@@ -111,7 +142,7 @@ class _ProductsState extends State<Products> {
   Widget image(Productse product) {
     if (product.gambar != null) {
       String imageUrl =
-          "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString();
+          "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
       return Container(
         height: 148,
         width: 148,
@@ -133,7 +164,7 @@ class _ProductsState extends State<Products> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
+                  "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString(),
                 ))),
         child: text(product),
       );
@@ -168,58 +199,29 @@ class _ProductsState extends State<Products> {
       ),
     );
   }
-  Widget productItem(BuildContext context, Productse product) {
+  Widget productItem(BuildContext context, Productse product, int index, Users? users) {
     String imageUrl =
-        "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString();
+        "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
     return Stack(
 
       children: [
-        //  Positioned.fill(
-
-
-        //     child: Container(
-        //       margin:const  EdgeInsets.only(top: 150),
-        //       width: 184,
-        //       height: 400,
-        //       decoration: BoxDecoration(
-        //         borderRadius: BorderRadius.circular(20),
-        //         color: const Color(0xFFFCFCFC),
-        //         boxShadow: const [
-        //           BoxShadow(
-        //             offset: Offset(0, 4),
-        //             blurRadius: 50,
-        //             color: Color(0x40AFAFAF),
-        //           ),
-        //         ],
-        //       ),
-        //       child: Column(
-        //         children: [
-        //           background(product),
-        //           const SizedBox(height: 12),
-        //           text(product),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
         Positioned.fill(
             child: Container(
 
               color: Colors.white,
               child:Column(
-
                   children :[
-
                     Image.network(
-
                       imageUrl,
                       height: 148,
                       fit: BoxFit.cover,
+
                       loadingBuilder: (context, child, loadingProgress) {
                         if (loadingProgress == null) return child;
                         return Center(
                           child: CircularProgressIndicator(),
                         );
-                      },
+                        },
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           height: 148,
@@ -239,7 +241,9 @@ class _ProductsState extends State<Products> {
               width: 184,
               height: 48,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                 _handleAdddatakeranjang(context, index, users);
+                },
                 style: ElevatedButton.styleFrom(
                   primary: kPrimaryColor,
                   shape: RoundedRectangleBorder(
@@ -261,7 +265,11 @@ class _ProductsState extends State<Products> {
 
       ],
     );
+
+
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -291,7 +299,7 @@ class _ProductsState extends State<Products> {
                 mainAxisSpacing: 100,
               ),
               itemBuilder: (BuildContext context, index) {
-                return productItem(context, data[index]);
+                return productItem(context, data[index], index, users);
               },
             );
           }
@@ -301,4 +309,46 @@ class _ProductsState extends State<Products> {
   }
 
 
+  Future<void> _handleAdddatakeranjang(BuildContext context, int index, Users users) async {
+
+
+    try{
+
+      var response = await http.post(Uri.parse(ApiConnect.add_datakeranjang), body: {
+      "id_customer":
+      users.idCustomer.toString(),
+      "id_barang":
+      listViews[index].idBarang.toString(),
+      "qty" :"1".toString()
+      });
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        final add_datakeranjang = AddChart.fromJson(jsonData);
+        if (response.statusCode == 200) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => CheckoutScreen()),
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: "Data Gagal masuk Keranjang",
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 12,
+          );
+        }
+      } else {
+        Fluttertoast.showToast(
+          msg:"Sukurinnnnn",
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 12,
+        );
+      }
+      }catch (e) {
+      // Handle error
+      print('Error: $e');
+    }
+      }
 }
