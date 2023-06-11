@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ecommerce_ui/Screen/Login/login_screen.dart';
+import 'package:ecommerce_ui/Remember.dart';
 import 'package:ecommerce_ui/SessionManager.dart';
 import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:ecommerce_ui/models/model_datakeranjang.dart';
@@ -37,6 +37,8 @@ class Products extends StatefulWidget {
 
 class _ProductsState extends State<Products> {
   late Future<List<Productse>> listblog;
+
+
   List<Productse> listViews = [];
 
   Future<List<Productse>> fetchData() async {
@@ -58,24 +60,6 @@ class _ProductsState extends State<Products> {
   void initState() {
     super.initState();
     listblog = fetchData();
-  }
-  void fetchDataAndHandleAddDataKeranjang(BuildContext context, int index) async {
-    final Users? users = await SessionManager.getUserData();
-    if (users != null && users.idCustomer != null) {
-      _handleAdddatakeranjang(context, index, users);
-    } else {
-      // Handle the scenario when user data is not available or user is not logged in
-      Fluttertoast.showToast(
-        msg: "Anda harus login terlebih dahulu",
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 12,
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
-      );
-    }
   }
 
   Widget background(Productse product) {
@@ -115,6 +99,7 @@ class _ProductsState extends State<Products> {
               if (product.harga != null)
                 Text(
                   "\n \n \n"+
+
                       product.harga.toString(),
                   style: const TextStyle(
                     fontSize: 10,
@@ -199,7 +184,7 @@ class _ProductsState extends State<Products> {
       ),
     );
   }
-  Widget productItem(BuildContext context, Productse product, int index, Users? users) {
+  Widget productItem(BuildContext context, Productse product, int index) {
     String imageUrl =
         "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
     return Stack(
@@ -211,6 +196,13 @@ class _ProductsState extends State<Products> {
               color: Colors.white,
               child:Column(
                   children :[
+                  // InkWell(
+                  // onTap: () {
+                  //   Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //   builder: (_) => DetailsScreen(product: product),
+                  //   ));
+                  //   }),
                     Image.network(
                       imageUrl,
                       height: 148,
@@ -242,7 +234,7 @@ class _ProductsState extends State<Products> {
               height: 48,
               child: ElevatedButton(
                 onPressed: () {
-                 _handleAdddatakeranjang(context, index, users);
+                  _handleAdddatakeranjang(context, index);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: kPrimaryColor,
@@ -299,7 +291,7 @@ class _ProductsState extends State<Products> {
                 mainAxisSpacing: 100,
               ),
               itemBuilder: (BuildContext context, index) {
-                return productItem(context, data[index], index, users);
+                return productItem(context, data[index], index);
               },
             );
           }
@@ -309,14 +301,13 @@ class _ProductsState extends State<Products> {
   }
 
 
-  Future<void> _handleAdddatakeranjang(BuildContext context, int index, Users users) async {
+  Future<void> _handleAdddatakeranjang(BuildContext context, int index) async {
+
 
 
     try{
-
       var response = await http.post(Uri.parse(ApiConnect.add_datakeranjang), body: {
-      "id_customer":
-      users.idCustomer.toString(),
+        "id_customer": Users.getIdCustomer().toString(),
       "id_barang":
       listViews[index].idBarang.toString(),
       "qty" :"1".toString()
@@ -340,7 +331,7 @@ class _ProductsState extends State<Products> {
         }
       } else {
         Fluttertoast.showToast(
-          msg:"Sukurinnnnn",
+          msg:"Sukurinnn",
           backgroundColor: Colors.red,
           textColor: Colors.white,
           fontSize: 12,

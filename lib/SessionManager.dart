@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SessionManager {
   static const String KEY_USER_DATA = 'user_data';
   static const String KEY_LOGGED_IN = 'logged_in';

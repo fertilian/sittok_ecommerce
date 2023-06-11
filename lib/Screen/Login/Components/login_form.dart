@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ecommerce_ui/API/Api_connect.dart';
+import 'package:ecommerce_ui/RememberUser.dart';
 import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +88,7 @@ class LoginForm extends StatelessWidget {
     bool isLoggedIn = await SessionManager.isLoggedIn();
 
     if (isLoggedIn) {
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -102,28 +104,24 @@ class LoginForm extends StatelessWidget {
 
       if (response.statusCode == 200) {
         final user = Users.fromJson(jsonDecode(response.body));
-        if (response.statusCode == 200) {
-          await SessionManager.saveUserData(user);
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        } else {
-        Fluttertoast.showToast(msg: "Gagal Login",
-        backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 12
+
+        await SessionManager.saveUserData(user);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
-        }
       } else {
-        Fluttertoast.showToast(msg: "Gagal Login",
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 12
+        Fluttertoast.showToast(
+          msg: "Gagal Login",
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 12,
         );
       }
     } catch (e) {
-
+      print('Error: $e');
     }
   }
-}
+
+  }
