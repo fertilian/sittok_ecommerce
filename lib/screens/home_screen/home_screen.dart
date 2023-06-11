@@ -3,6 +3,7 @@ import 'package:ecommerce_ui/Akun/Akun_screen.dart';
 import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/navBar/navBar.dart';
+import 'package:ecommerce_ui/screens/home_screen/components/productsr.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ecommerce_ui/models/product.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  List<Product> favorites = [];
+  List<Productse> favorites = [];
 
   List<Widget> _fragments = [
     const FragmentBeranda(),
@@ -78,7 +79,6 @@ class _HomeScreen extends State<HomeScreen> {
 }
 class FragmentBeranda extends StatelessWidget {
   const FragmentBeranda({Key? key}) : super(key: key);
-  @override
   Widget appBar(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 52, 12, 0),
@@ -154,115 +154,154 @@ class FragmentBeranda extends StatelessWidget {
       ),
     );
   }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Padding(
+        padding: const EdgeInsets.only(top: 84),
+        child: ShaderMask(
+          shaderCallback: (bounds) {
+            return const LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                Colors.white,
+                Colors.white,
+              ],
+              stops: [0.0, 0.05, 1.0],
+            ).createShader(bounds);
+          },
+          child: ListView(
+            padding: const EdgeInsets.only(top: 24),
+            children: [
+              appBar(context),
+              title(),
+              const SizedBox(height: 24),
+              searchBar(),
+              const SizedBox(height: 24),
+              Categories(),
+              const SizedBox(height: 24),
+              FragmentP(),
+              // FutureBuilder<List<Productse>>(
+              //   future: ServiceApiBarang().getData(),
+              //   builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+              //     if (snapshot.connectionState == ConnectionState.waiting) {
+              //       return Center(
+              //         child: CircularProgressIndicator(),
+              //       );
+              //     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              //       return Center(
+              //         child: Text('No data available.'),
+              //       );
+              //     } else {
+              //       List<Productse> data = snapshot.data!;
+              //       return Productsr(
+              //         title: 'Populer',
+              //         data: data,
+              //       );
+              //     }
+              //   },
+              // ),
+              const SizedBox(height: 24),
+
+              FutureBuilder<List<Productse>>(
+                future: ServiceApiBarang().getData(),
+                builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Text('No data available.'),
+                    );
+                  } else {
+                    List<Productse> data = snapshot.data!;
+                    return Productsr(
+                      title: 'Produk Baru',
+                      data: data,
+                    );
+                  }
+                },
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FragmentP extends StatelessWidget {
+  const FragmentP({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          appBar(context),
-          Padding(
-            padding: const EdgeInsets.only(top: 84),
-            child: ShaderMask(
-              shaderCallback: (bounds) {
-                return const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.white,
-                    Colors.white,
-                  ],
-                  stops: [0.0, 0.05, 1.0],
-                ).createShader(bounds);
-              },
-              child: ListView(
-                padding: const EdgeInsets.only(top: 24),
-                children: [
-                  title(),
-                  const SizedBox(height: 24),
-                  searchBar(),
-                  const SizedBox(height: 24),
-              Categories(),
-                  const SizedBox(height: 24),
-                  FutureBuilder<List<Productse>>(
-                    future: ServiceApiBarang().getData(),
-                    builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(
-                          child: Text('No data available.'),
-                        );
-                      } else {
-                        List<Productse> data = snapshot.data!;
-                        return Products(
-                          title: 'Populer',
-                          data: data,
-                        );
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 24),
-                  FutureBuilder<List<Productse>>(
-                    future: ServiceApiBarang().getData(),
-                    builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(
-                          child: Text('No data available.'),
-                        );
-                      } else {
-                        List<Productse> data = snapshot.data!;
-                        return Products(
-                          title: 'Produk Baru',
-                          data: data,
-                        );
-                      }
-                    },
-                  ),
-                  const SizedBox(height: 40),
-                ],
-              ),
-            ),
-          ),
-        ],
+
+      body: FutureBuilder<List<Productse>>(
+
+        future: ServiceApiBarang().getData(),
+        builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text('No data available.'),
+            );
+          } else {
+            List<Productse> data = snapshot.data!;
+            return Productsr(
+
+              title: 'Produk',
+              data: data,
+            );
+          }
+        },
       ),
     );
   }
-
-
-
-
-
-// Metode lainnya tidak berubah
 }
-
 
 class FragmentProduk extends StatelessWidget {
   const FragmentProduk({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CheckoutScreen()),
-        );
-      },
-      child: CheckoutScreen(),
+    return Scaffold(
+
+      body: FutureBuilder<List<Productse>>(
+        future: ServiceApiBarang().getData(),
+        builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+              child: Text('No data available.'),
+            );
+          } else {
+            List<Productse> data = snapshot.data!;
+            return Products(
+              title: 'Produk',
+              data: data,
+            );
+          }
+        },
+      ),
     );
   }
 }
 
+
 class FavoriteScreen extends StatelessWidget {
-  final List<Product> favorites;
+  final List<Productse> favorites;
 
   const FavoriteScreen({Key? key, required this.favorites}) : super(key: key);
 
@@ -295,5 +334,3 @@ class FragmentAkun extends StatelessWidget {
     );
   }
 }
-
-

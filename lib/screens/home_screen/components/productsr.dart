@@ -9,11 +9,11 @@ import 'package:ecommerce_ui/constants.dart';
 import '../../details_screen/details_screen.dart';
 
 
-class Products extends StatefulWidget {
+class Productsr extends StatefulWidget {
   final String title;
   final List<Productse> data;
 
-  Products({
+  Productsr({
     Key? key,
     required this.title,
     required this.data,
@@ -23,7 +23,7 @@ class Products extends StatefulWidget {
   _ProductsState createState() => _ProductsState();
 }
 
-class _ProductsState extends State<Products> {
+class _ProductsState extends State<Productsr> {
   late Future<List<Productse>> listblog;
   List<Productse> listViews = [];
 
@@ -73,20 +73,20 @@ class _ProductsState extends State<Products> {
           Row(
             children: [
               if (product.merkBarang != null && product.merkBarang!.isNotEmpty)
-                Text("\n \n \n"+
-                    product.merkBarang.toString(),
+                Text(
+
+                  product.merkBarang.toString(),
                   style: const TextStyle(
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               const Spacer(),
               if (product.harga != null)
                 Text(
-                  "\n \n \n"+
-                      product.harga.toString(),
+                  product.harga.toString(),
                   style: const TextStyle(
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -97,10 +97,10 @@ class _ProductsState extends State<Products> {
             Text(
               product.deskripsi.toString(),
               overflow: TextOverflow.ellipsis,
-              maxLines: 6,
+              maxLines: 1,
               style: TextStyle(
-                fontSize: 9,
-                color: kSecondaryColor.withOpacity(0.9),
+                fontSize: 13,
+                color: kSecondaryColor.withOpacity(0.6),
               ),
             ),
         ],
@@ -172,65 +172,99 @@ class _ProductsState extends State<Products> {
     String imageUrl =
         "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString();
     return Stack(
-
       children: [
-        //  Positioned.fill(
+
+        Positioned.fill(
+          child: Container(
+            width: 184,
+            height: 200,
+            decoration: BoxDecoration(
+                border: Border.all(
+                    width: 4,
+                    color: Theme.of(context)
+                        .scaffoldBackgroundColor),
+                boxShadow: [
+                  BoxShadow(
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.1),
+                      offset: Offset(0, 10))
+                ],
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
+                    ))),
 
 
-        //     child: Container(
-        //       margin:const  EdgeInsets.only(top: 150),
-        //       width: 184,
-        //       height: 400,
-        //       decoration: BoxDecoration(
-        //         borderRadius: BorderRadius.circular(20),
-        //         color: const Color(0xFFFCFCFC),
-        //         boxShadow: const [
-        //           BoxShadow(
-        //             offset: Offset(0, 4),
-        //             blurRadius: 50,
-        //             color: Color(0x40AFAFAF),
-        //           ),
-        //         ],
-        //       ),
-        //       child: Column(
-        //         children: [
-        //           background(product),
-        //           const SizedBox(height: 12),
-        //           text(product),
-        //         ],
-        //       ),
+            child: Column(
+
+              children: [
+                background(product),
+                const SizedBox(height: 12),
+                text(product),
+              ],
+            ),
+          ),
+
+
+
+          // Image.network(
+
+          //   imageUrl,
+          //   height: 148,
+          //   fit: BoxFit.cover,
+          //   loadingBuilder: (context, child, loadingProgress) {
+          //     if (loadingProgress == null) return child;
+          //     return Center(
+          //       child: CircularProgressIndicator(),
+          //     );
+          //   },
+          //   errorBuilder: (context, error, stackTrace) {
+          //     return Container(
+          //       height: 148,
+          //       color: Colors.grey,
+          //     );
+          //   },
+
+          // ),
+        ),
+        //  Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: Container(
+        //     width: 184,
+        //     height: 200,
+        //           decoration: BoxDecoration(
+        //                           border: Border.all(
+        //                               width: 4,
+        //                               color: Theme.of(context)
+        //                                   .scaffoldBackgroundColor),
+        //                           boxShadow: [
+        //                             BoxShadow(
+        //                                 spreadRadius: 2,
+        //                                 blurRadius: 10,
+        //                                 color: Colors.black.withOpacity(0.1),
+        //                                 offset: Offset(0, 10))
+        //                           ],
+        //                           shape: BoxShape.circle,
+        //                           image: DecorationImage(
+        //                               fit: BoxFit.cover,
+        //                               image: NetworkImage(
+        //                                 "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
+        //                               ))),
+
+
+        //     child: Column(
+
+        //       children: [
+        //         background(product),
+        //         const SizedBox(height: 12),
+        //         text(product),
+        //       ],
         //     ),
         //   ),
-        Positioned.fill(
-            child: Container(
-
-              color: Colors.white,
-              child:Column(
-
-                  children :[
-
-                    Image.network(
-
-                      imageUrl,
-                      height: 148,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      },
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          height: 148,
-                          color: Colors.grey,
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 5,),
-                    text(product)
-                  ]),)
-        ),
+        // ),
         Align(
           alignment: Alignment.bottomCenter,
           child: ClipRRect(
@@ -258,7 +292,6 @@ class _ProductsState extends State<Products> {
           ),
         ),
         favoriteIcon(),
-
       ],
     );
   }
@@ -286,9 +319,9 @@ class _ProductsState extends State<Products> {
               padding: EdgeInsets.all(16),
               itemCount: data.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: data.length,
                 crossAxisSpacing: 16,
-                mainAxisSpacing: 100,
+                mainAxisSpacing: 16,
               ),
               itemBuilder: (BuildContext context, index) {
                 return productItem(context, data[index]);
