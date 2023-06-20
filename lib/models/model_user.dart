@@ -1,19 +1,18 @@
-import 'package:ecommerce_ui/SessionManager.dart';
-
 class Users {
   int? idCustomer;
   String? namaCustomer;
   String? email;
   String? noTelpCustomer;
   String? alamat;
+  String? profil;
 
-  Users({
-    this.idCustomer,
-    this.namaCustomer,
-    this.email,
-    this.noTelpCustomer,
-    this.alamat,
-  });
+  Users(
+      {this.idCustomer,
+        this.namaCustomer,
+        this.email,
+        this.noTelpCustomer,
+        this.alamat,
+        this.profil});
 
   Users.fromJson(Map<String, dynamic> json) {
     idCustomer = json['id_customer'];
@@ -21,6 +20,7 @@ class Users {
     email = json['email'];
     noTelpCustomer = json['no_telp_customer'];
     alamat = json['alamat'];
+    profil = json['profil'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,13 +30,7 @@ class Users {
     data['email'] = this.email;
     data['no_telp_customer'] = this.noTelpCustomer;
     data['alamat'] = this.alamat;
+    data['profil'] = this.profil;
     return data;
   }
-
-
-  static Future<int?> getIdCustomer() async {
-    Users? userData = await SessionManager.getUserData();
-    return userData?.idCustomer;
-  }
-
 }
