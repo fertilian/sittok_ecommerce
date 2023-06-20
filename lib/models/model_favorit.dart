@@ -1,4 +1,4 @@
-class Productse {
+class GetDataFav {
   int? idBarang;
   String? merkBarang;
   int? jumlahBarang;
@@ -10,7 +10,7 @@ class Productse {
   String? updatedAt;
   bool? isLiked;
 
-  Productse(
+  GetDataFav(
       {this.idBarang,
         this.merkBarang,
         this.jumlahBarang,
@@ -22,7 +22,7 @@ class Productse {
         this.updatedAt,
         this.isLiked});
 
-  Productse.fromJson(Map<String, dynamic> json) {
+  GetDataFav.fromJson(Map<String, dynamic> json) {
     idBarang = json['id_barang'];
     merkBarang = json['merk_barang'];
     jumlahBarang = json['jumlah_barang'];

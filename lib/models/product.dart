@@ -13,7 +13,7 @@ class Product {
   int _quantity;
   bool isAvailable;
   bool isFavorite;
- 
+
   int get quantity => _quantity;
 
   set quantity(int newQuantity){

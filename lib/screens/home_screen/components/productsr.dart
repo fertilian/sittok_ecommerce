@@ -4,10 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../API/Api_Service.dart';
 
-
 import 'package:ecommerce_ui/constants.dart';
 import '../../details_screen/details_screen.dart';
-
 
 class Productsr extends StatefulWidget {
   final String title;
@@ -74,7 +72,6 @@ class _ProductsState extends State<Productsr> {
             children: [
               if (product.merkBarang != null && product.merkBarang!.isNotEmpty)
                 Text(
-
                   product.merkBarang.toString(),
                   style: const TextStyle(
                     fontSize: 15,
@@ -110,18 +107,15 @@ class _ProductsState extends State<Productsr> {
 
   Widget image(Productse product) {
     if (product.gambar != null) {
-      String imageUrl =
-          "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
+      String imageUrl = "https://fd01-202-154-18-72.ngrok-free.app/" +
+          product.gambar.toString();
       return Container(
         height: 148,
         width: 148,
         color: Colors.grey,
-
         decoration: BoxDecoration(
             border: Border.all(
-                width: 4,
-                color: Theme.of(context)
-                    .scaffoldBackgroundColor),
+                width: 4, color: Theme.of(context).scaffoldBackgroundColor),
             boxShadow: [
               BoxShadow(
                   spreadRadius: 2,
@@ -133,7 +127,8 @@ class _ProductsState extends State<Productsr> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString(),
+                  "https://fd01-202-154-18-72.ngrok-free.app/" +
+                      product.gambar.toString(),
                 ))),
         child: text(product),
       );
@@ -166,9 +161,10 @@ class _ProductsState extends State<Productsr> {
       ),
     );
   }
+
   Widget productItem(BuildContext context, Productse product) {
-    String imageUrl =
-        "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString();
+    String imageUrl = "https://fd01-202-154-18-72.ngrok-free.app/" +
+        product.gambar.toString();
     return Stack(
       children: [
         Positioned.fill(
@@ -176,11 +172,8 @@ class _ProductsState extends State<Productsr> {
             width: 184,
             height: 200,
             decoration: BoxDecoration(
-
                 border: Border.all(
-                    width: 4,
-                    color: Theme.of(context)
-                        .scaffoldBackgroundColor),
+                    width: 4, color: Theme.of(context).scaffoldBackgroundColor),
                 boxShadow: [
                   BoxShadow(
                       spreadRadius: 2,
@@ -192,7 +185,8 @@ class _ProductsState extends State<Productsr> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar.toString(),
+                      "https://2637-114-5-104-99.ngrok-free.app/" +
+                          product.gambar.toString(),
                     ))),
             child: Column(
               children: [
@@ -202,8 +196,6 @@ class _ProductsState extends State<Productsr> {
               ],
             ),
           ),
-
-
 
           // Image.network(
 
@@ -249,7 +241,6 @@ class _ProductsState extends State<Productsr> {
         //                                 "https://445e-103-160-182-11.ngrok-free.app/" + product.gambar.toString(),
         //                               ))),
 
-
         //     child: Column(
 
         //       children: [
@@ -275,7 +266,7 @@ class _ProductsState extends State<Productsr> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Add to Cart',
                   style: TextStyle(
                     color: Colors.white,
@@ -299,9 +290,10 @@ class _ProductsState extends State<Productsr> {
       ),
       body: FutureBuilder<List<Productse>>(
         future: listblog,
-        builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
@@ -327,6 +319,4 @@ class _ProductsState extends State<Productsr> {
       ),
     );
   }
-
-
 }

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:ecommerce_ui/SessionManager.dart';
 import 'package:ecommerce_ui/models/GetDetilBarang.dart';
-import 'package:ecommerce_ui/models/GetKategori.dart';
 import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:ecommerce_ui/models/model_datakeranjang.dart';
+import 'package:ecommerce_ui/models/model_favorit.dart';
 import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:ecommerce_ui/screens/checkout_screen/checkout_screen.dart';
 import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
@@ -20,11 +20,11 @@ import 'package:ecommerce_ui/constants.dart';
 import '../../../API/Api_connect.dart';
 import '../../details_screen/details_screen.dart';
 
-class Products extends StatefulWidget {
+class ProductF extends StatefulWidget {
   final String title;
-  final List<Productse> data;
+  final List<GetDataFav> data;
 
-  Products({
+  ProductF({
     Key? key,
     required this.title,
     required this.data,
@@ -34,19 +34,16 @@ class Products extends StatefulWidget {
   _ProductsState createState() => _ProductsState();
 }
 
-class _ProductsState extends State<Products> {
-  late Future<List<Productse>> listblog;
-  late Future<List<Kategori>> listkategori;
+class _ProductsState extends State<ProductF> {
+  late Future<List<GetDataFav>> listblog;
   late Map<int, bool> isLiked = {};
 
-  List<Productse> listViews = [];
-  List<Kategori> _list = [];
-  List<Productse> originalListViews = [];
+  List<GetDataFav> listViews = [];
+  List<GetDataFav> originalListViews = [];
 
-  Future<List<Productse>> fetchData() async {
+  Future<List<GetDataFav>> fetchData() async {
     try {
-      List<Productse> data = await ServiceApiBarang().getData();
-      List<Kategori> kategori = await ServiceApiKategori().getData();
+      List<GetDataFav> data = await ServiceApiFavorit().getData();
       setState(() {
         listViews = data;
         originalListViews = List.from(data); // Salin data ke originalListViews
@@ -61,25 +58,10 @@ class _ProductsState extends State<Products> {
     }
   }
 
-  Future<List<Kategori>> fetchData2() async {
-    try {
-      List<Kategori> kategori = await ServiceApiKategori().getData();
-      setState(() {
-        _list = kategori;
-      });
-      return kategori;
-    } catch (error) {
-      // Handle error jika terjadi kesalahan saat mengambil data dari API
-      print('Error fetching data: $error');
-      throw Exception('Failed to load data');
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     listblog = fetchData();
-    listkategori = fetchData2();
   }
 
   void updateList(String value) {
@@ -131,7 +113,7 @@ class _ProductsState extends State<Products> {
     });
   }
 
-  Widget background(Productse product) {
+  Widget background(GetDataFav product) {
     return Container(
       height: 140,
       decoration: BoxDecoration(
@@ -148,7 +130,7 @@ class _ProductsState extends State<Products> {
     );
   }
 
-  Widget text(Productse product) {
+  Widget text(GetDataFav product) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -191,7 +173,7 @@ class _ProductsState extends State<Products> {
     );
   }
 
-  Widget image(Productse product) {
+  Widget image(GetDataFav product) {
     if (product.gambar != null) {
       String imageUrl = "https://8abd-202-154-18-72.ngrok-free.app/" +
           product.gambar.toString();
@@ -284,29 +266,34 @@ class _ProductsState extends State<Products> {
     );
   }
 
-  Widget productItem(BuildContext context, Productse product, int index) {
+  Widget productItem(BuildContext context, GetDataFav product, int index) {
     String imageUrl = "https://8abd-202-154-18-72.ngrok-free.app/" +
         product.gambar.toString();
     return Stack(
       children: [
         InkWell(
-            borderRadius: BorderRadius.circular(20),
-            onTap: () {
-              String idBarang = widget.data[index].idBarang.toString();
-              _handleBarang(idBarang);
+          onTap: () {
+            String idBarang = widget.data[index].idBarang.toString();
+            _handleBarang(idBarang);
+          },
+          child: Image.network(
+            imageUrl,
+            height: 125,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             },
-            child: Container(
-              width: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
-                  width: 100,
-                  height: 100,
-                ),
-              ),
-            )),
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 128,
+                color: Colors.grey,
+              );
+            },
+          ),
+        ),
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
@@ -372,10 +359,10 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(context),
-      body: FutureBuilder<List<Productse>>(
+      body: FutureBuilder<List<GetDataFav>>(
         future: listblog,
         builder:
-            (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
+            (BuildContext context, AsyncSnapshot<List<GetDataFav>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
@@ -385,7 +372,7 @@ class _ProductsState extends State<Products> {
               child: Text('Error: ${snapshot.error}'),
             );
           } else {
-            List<Productse> data = snapshot.data!;
+            List<GetDataFav> data = snapshot.data!;
 
             if (listViews.isEmpty) {
               return const Center(
