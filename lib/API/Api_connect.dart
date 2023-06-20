@@ -4,7 +4,7 @@ class ApiConnect {
   static const login = "$connectApi/login";
   static const barang = "$connectApi/getDataBarang";
   static const favorit = "$connectApi/getDataBarangFav";
-  static const register = "$connectApi/";
+  static const register = "$connectApi/register";
   static const add_datakeranjang = "$connectApi/addDataKeranjang";
   static const add_datafavorit = "$connectApi/addDataFavorit";
   static const del_datafavorit = "$connectApi/deleteDataFavorit";
