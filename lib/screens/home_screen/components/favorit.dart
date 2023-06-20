@@ -272,11 +272,14 @@ class _ProductsState extends State<ProductF> {
     return Stack(
       children: [
         InkWell(
+          borderRadius: BorderRadius.circular(20),
           onTap: () {
             String idBarang = widget.data[index].idBarang.toString();
             _handleBarang(idBarang);
           },
-          child: Image.network(
+        child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.network(
             imageUrl,
             height: 125,
             fit: BoxFit.cover,
@@ -293,6 +296,7 @@ class _ProductsState extends State<ProductF> {
               );
             },
           ),
+        ),
         ),
         Align(
           alignment: Alignment.bottomCenter,

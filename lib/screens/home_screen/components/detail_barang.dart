@@ -71,8 +71,8 @@ class _DetilBarangState extends State<DetilBarang> {
     int? productId = widget.notaData.idBarang;
     bool isProductLiked = isLiked[productId] ?? false;
     return Positioned(
-      top: 35,
-      right: 15,
+      top: 10,
+      right: 10,
       child:
 
       widget.notaData.isLiked == true ?
@@ -272,23 +272,28 @@ class _DetilBarangState extends State<DetilBarang> {
     return Scaffold(
       appBar: appBar(context),
       body: Stack(children: [
+        Align(
+          alignment: Alignment.topCenter,
+          child:
         Image.network(
-          imageUrl,
-          height: 230,
-          fit: BoxFit.cover,
+            imageUrl,
+            alignment: Alignment.center,
+            height: 230,
+            fit: BoxFit.cover,
 
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) return child;
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
-          errorBuilder: (context, error, stackTrace) {
-            return Container(
-              height: 128,
-              color: Colors.grey,
-            );
-          },
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 128,
+                color: Colors.grey,
+              );
+            },
+        ),
         ),
         favoriteIcon(0),
         Padding(
