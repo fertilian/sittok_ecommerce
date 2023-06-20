@@ -175,7 +175,7 @@ void initState() {
 
   Widget image(GetKeranjang product) {
     String imagePath =
-        "https://2637-114-5-104-99.ngrok-free.app/" + product.gambar!;
+        "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar!;
 
     return Positioned(
       left: 16,
@@ -288,7 +288,7 @@ Widget item(BuildContext context, GetTransaksi product, int index) {
 }
 
 Widget listnota(BuildContext context, GetNota product, int index) {
-String imagePath = "https://8abd-202-154-18-72.ngrok-free.app/" + product.gambar.toString();
+String imagePath = "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar.toString();
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Stack(
@@ -708,7 +708,7 @@ child:  Scaffold(
             Row(children : [
 
  Image.network(
-      "https://67f2-202-67-40-235.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
+      "https://9f20-116-206-40-7.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
       height: 80,
       width: 80,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

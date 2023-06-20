@@ -1,5 +1,5 @@
 class ApiConnect {
-  static const hostConnect = "https://c05d-202-154-18-72.ngrok-free.app";
+  static const hostConnect = "https://9f20-116-206-40-7.ngrok-free.app";
   static const connectApi = "$hostConnect/api";
   static const login = "$connectApi/login";
   static const barang = "$connectApi/getDataBarang";

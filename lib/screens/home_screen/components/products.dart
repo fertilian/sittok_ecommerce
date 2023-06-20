@@ -193,7 +193,7 @@ class _ProductsState extends State<Products> {
 
   Widget image(Productse product) {
     if (product.gambar != null) {
-      String imageUrl = "https://8abd-202-154-18-72.ngrok-free.app/" +
+      String imageUrl = "https://9f20-116-206-40-7.ngrok-free.app/" +
           product.gambar.toString();
       return Container(
         height: 128,
@@ -213,7 +213,7 @@ class _ProductsState extends State<Products> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://c05d-202-154-18-72.ngrok-free.app/" +
+                  "https://9f20-116-206-40-7.ngrok-free.app/" +
                       product.gambar.toString(),
                 ))),
         child: text(product),
@@ -285,7 +285,7 @@ class _ProductsState extends State<Products> {
   }
 
   Widget productItem(BuildContext context, Productse product, int index) {
-    String imageUrl = "https://c05d-202-154-18-72.ngrok-free.app/" +
+    String imageUrl = "https://9f20-116-206-40-7.ngrok-free.app/" +
         product.gambar.toString();
     return Stack(
       children: [
@@ -346,24 +346,35 @@ class _ProductsState extends State<Products> {
   int selectedIndex = 0;
   TextEditingController searchController = TextEditingController();
   PreferredSizeWidget appBar(BuildContext context) {
-    return AppBar(
-      toolbarHeight: 56, // Sesuaikan dengan ketinggian yang diinginkan
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: TextField(
-        onChanged: (value) => updateList(value),
-        textAlignVertical: TextAlignVertical.bottom,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
-            borderSide: const BorderSide(
-              color: kSecondaryColor,
+    return PreferredSize(
+      preferredSize: Size.fromHeight(56), // Sesuaikan dengan ketinggian yang diinginkan
+      child: Stack(
+        children: [
+          AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            automaticallyImplyLeading: false, // Untuk menghapus tombol kembali di AppBar
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            child: TextField(
+              onChanged: (value) => updateList(value),
+              textAlignVertical: TextAlignVertical.bottom,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: const BorderSide(
+                    color: kSecondaryColor,
+                  ),
+                ),
+                fillColor: Colors.white,
+                hintText: 'Cari Produk Yang Anda Inginkan',
+                prefixIcon: const Icon(FontAwesomeIcons.search),
+              ),
             ),
           ),
-          fillColor: Colors.white,
-          hintText: 'Cari Produk Yang Anda Inginkan',
-          prefixIcon: const Icon(FontAwesomeIcons.search),
-        ),
+        ],
       ),
     );
   }

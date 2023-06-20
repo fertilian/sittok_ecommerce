@@ -173,7 +173,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget image(GetDetilBarang product) {
     if (product.gambar != null) {
       String imageUrl =
-          "https://c05d-202-154-18-72.ngrok-free.app/" + widget.notaData.gambar.toString();
+          "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString();
       return Container(
         height: 128,
         width: 128,
@@ -195,7 +195,7 @@ class _DetilBarangState extends State<DetilBarang> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://c05d-202-154-18-72.ngrok-free.app/" + widget.notaData.gambar.toString(),
+                  "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString(),
                 ))),
 
       );
@@ -267,7 +267,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget build(BuildContext context) {
     int index;
     String imageUrl =
-        "https://c05d-202-154-18-72.ngrok-free.app/" + widget.notaData.gambar.toString();
+        "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString();
     GetDetilBarang product;
     return Scaffold(
       appBar: appBar(context),
