@@ -49,7 +49,7 @@ class _AkunPicState extends State<AkunPic> {
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl = "https://1eef-2001-448a-5122-2ef1-fde3-ccdc-8024-49f4.ngrok-free.app/" +
+    String imageUrl = "https://c05d-202-154-18-72.ngrok-free.app/" +
         dataimage!.profil.toString();
     return Column(children: [
       const SizedBox(

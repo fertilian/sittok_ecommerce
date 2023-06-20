@@ -213,7 +213,7 @@ class _ProductsState extends State<Products> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://8abd-202-154-18-72.ngrok-free.app/" +
+                  "https://c05d-202-154-18-72.ngrok-free.app/" +
                       product.gambar.toString(),
                 ))),
         child: text(product),
@@ -285,7 +285,7 @@ class _ProductsState extends State<Products> {
   }
 
   Widget productItem(BuildContext context, Productse product, int index) {
-    String imageUrl = "https://8abd-202-154-18-72.ngrok-free.app/" +
+    String imageUrl = "https://c05d-202-154-18-72.ngrok-free.app/" +
         product.gambar.toString();
     return Stack(
       children: [

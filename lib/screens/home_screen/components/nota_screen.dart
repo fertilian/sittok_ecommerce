@@ -204,7 +204,7 @@ void initState() {
             Row(children : [
 
  Image.network(
-      "https://8abd-202-154-18-72.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
+      "https://c05d-202-154-18-72.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
       height: 80,
       width: 80,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -576,7 +576,7 @@ Future<void> _showImageDialog(File? image) async {
 }
 
 Future<void> _showImageDialogNot() async {
-  String imageUrl = 'https://8abd-202-154-18-72.ngrok-free.app' + widget.notaData[0].buktiBayar.toString();
+  String imageUrl = 'https://c05d-202-154-18-72.ngrok-free.app' + widget.notaData[0].buktiBayar.toString();
  return  showDialog(
     context: context,
     builder: (context) {
