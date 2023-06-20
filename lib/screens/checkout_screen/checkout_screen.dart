@@ -205,7 +205,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   Widget item(BuildContext context, GetKeranjang product, int index) {
-    String imagePath = "https://8abd-202-154-18-72.ngrok-free.app/" + product.gambar.toString();
+    String imagePath = "https://c05d-202-154-18-72.ngrok-free.app/" + product.gambar.toString();
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),

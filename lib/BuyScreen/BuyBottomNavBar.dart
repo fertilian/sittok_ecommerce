@@ -480,7 +480,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
         var response = await http.post(Uri.parse(ApiConnect.detiljual), body: {
           "id_jual": transaksi.idJual.toString(),
           "id_keranjang": listViews[index].idKeranjang.toString(),
-          "jumlah": total?.jumlah.toString(),
+          "jumlah": listViews[index].jumlah.toString(),
           "harga": listViews[index].harga.toString(),
           "qty": listViews[index].qty.toString(),
           "total_final": total!.jumlah.toString(),
