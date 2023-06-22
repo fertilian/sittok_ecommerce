@@ -185,7 +185,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
 
   Widget image(GetKeranjang product) {
-    String imagePath = "https://2943-36-73-186-161.ngrok-free.app/" + product.gambar!;
+    String imagePath = "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar!;
 
     return Positioned(
       left: 16,
