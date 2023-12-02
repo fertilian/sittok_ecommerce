@@ -14,6 +14,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class BuyBottomNavBar extends StatefulWidget {
   @override
   _BuyBottomNavBarState createState() => _BuyBottomNavBarState();
@@ -45,6 +47,37 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
     }
   }
 
+  List<dynamic> form = [];
+  late String _selectedDate;
+  late String _selectedTime;
+  int totalHarga = 0; // Ganti dengan nilai total harga yang sesuai
+  int totalBayar = 0;
+  int sisaBayar = 0;
+  TimeOfDay _selectedStartTime = TimeOfDay.now();
+  TimeOfDay _selectedEndTime = TimeOfDay.now();
+
+  TextEditingController _namaController = TextEditingController();
+  TextEditingController _totalBayarController = TextEditingController();
+  TextEditingController _sisaBayarController = TextEditingController();
+  TextEditingController _dateController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
+  TextEditingController _startTimeController = TextEditingController();
+  TextEditingController _endTimeController = TextEditingController();
+  TextEditingController _hargaController = TextEditingController();
+  TextEditingController _lapanganController = TextEditingController();
+  TextEditingController _tipeController = TextEditingController();
+  TextEditingController _buktiBayarController = TextEditingController();
+
+  String namaCust = '';
+
+  @override
+  void dispose() {
+    _startTimeController.dispose();
+    _endTimeController.dispose();
+    _hargaController.dispose();
+    super.dispose();
+  }
+
   Future<void> fetchData2() async {
     try {
       Total? total = await TotalService().getTotalJumlah();
@@ -58,6 +91,56 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
       throw Exception('Failed to load data');
     }
   }
+
+  Future<void> _selectStartTime(BuildContext context) async {
+    final TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedStartTime,
+    );
+
+    if (selectedTime != null) {
+      setState(() {
+        _selectedStartTime = selectedTime;
+        _startTimeController.text = selectedTime.format(context);
+        _calculateHarga();
+      });
+    }
+  }
+
+  Future<void> _selectEndTime(BuildContext context) async {
+    final TimeOfDay? selectedTime = await showTimePicker(
+      context: context,
+      initialTime: _selectedEndTime,
+    );
+
+    if (selectedTime != null) {
+      setState(() {
+        _selectedEndTime = selectedTime;
+        _endTimeController.text = selectedTime.format(context);
+        _calculateHarga();
+      });
+    }
+  }
+
+  Future<void> _calculateHarga() {
+    if (_selectedStartTime != null && _selectedEndTime != null) {
+      final int minDifference =
+          _selectedEndTime.minute - _selectedStartTime.minute;
+      final int hourDifference =
+          (_selectedEndTime.hour - _selectedStartTime.hour) * 60;
+      final int totalMinutes = minDifference + hourDifference;
+
+      final int harga = form[0]['harga'];
+      final int hargaKotor = totalMinutes * harga;
+      final double totalHarga = hargaKotor / 60;
+
+      _hargaController.text = totalHarga
+          .toStringAsFixed(2); // Convert to string with 2 decimal places
+    }
+
+    return Future<void>.value();
+  }
+
 
   @override
   void initState() {
@@ -73,7 +156,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
     return BottomAppBar(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        height: 130,
+        height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -105,7 +188,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
                     builder: (context) {
                       return Dialog(
                           child: Container(
-                            height: 300,
+                            height: 1000,
                             padding: EdgeInsets.all(10),
                             child: Column(
                               children: [
@@ -131,6 +214,43 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
                                       padding: EdgeInsets.all(16.0),
                                       child: Icon(Icons.person),
                                     ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextField(
+                                  controller: _dateController,
+                                  readOnly: true,
+                                  onTap: () {
+                                    _selectDate(context);
+                                  },
+                                  decoration: InputDecoration(
+                                    labelText: 'Tanggal',
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextField(
+                                  controller: _startTimeController,
+                                  readOnly: true,
+                                  onTap: () => _selectStartTime(context),
+                                  decoration: InputDecoration(
+                                    labelText: 'Jam Awal',
+                                    suffixIcon: Icon(Icons.access_time),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextField(
+                                  controller: _endTimeController,
+                                  readOnly: true,
+                                  onTap: () => _selectEndTime(context),
+                                  decoration: InputDecoration(
+                                    labelText: 'Jam Akhir',
+                                    suffixIcon: Icon(Icons.access_time),
                                   ),
                                 ),
                                 const SizedBox(
@@ -217,6 +337,21 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
         ),
       ),
     );
+  }
+
+  void _selectDate(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 3)),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+        _dateController.text = _selectedDate.toString();
+      });
+    }
   }
 
   Future<void> pop(BuildContext context) async {

@@ -10,8 +10,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../mocks/mock_data.dart';
-import '../../models/product.dart';
 import 'package:ecommerce_ui/constants.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -185,7 +183,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
 
   Widget image(GetKeranjang product) {
-    String imagePath = "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar!;
+    String imagePath = "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar!;
 
     return Positioned(
       left: 16,
@@ -205,7 +203,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   Widget item(BuildContext context, GetKeranjang product, int index) {
-    String imagePath = "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar.toString();
+    String imagePath = "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar.toString();
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),

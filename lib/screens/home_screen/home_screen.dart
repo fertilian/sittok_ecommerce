@@ -10,7 +10,6 @@ import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/navBar/navBar.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/coba.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/favorit.dart';
-
 import 'package:ecommerce_ui/screens/home_screen/components/productsr.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/tracking.dart';
 import 'package:flutter/material.dart';
@@ -65,19 +64,19 @@ class _HomeScreen extends State<HomeScreen> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.purple),
+            icon: Icon(Icons.home, color: Colors.blueAccent),
             label: 'Beranda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag, color: Colors.purple),
+            icon: Icon(Icons.shopping_bag, color: Colors.blueAccent),
             label: 'Pesanan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite, color: Colors.purple),
+            icon: Icon(Icons.favorite, color: Colors.blueAccent),
             label: 'Favorit',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: Colors.purple),
+            icon: Icon(Icons.account_circle, color: Colors.blueAccent),
             label: 'Akun',
           ),
         ],
@@ -166,7 +165,7 @@ class _FragmentBerandaState extends State<FragmentBeranda> {
             ),
             const SizedBox(width: 8),
             const Text(
-              'Selamat Datang di Sittok',
+              'Selamat Datang di PDAM Surya Sembada',
               style: TextStyle(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
@@ -195,7 +194,7 @@ class _FragmentBerandaState extends State<FragmentBeranda> {
     return const Padding(
       padding: EdgeInsets.only(left: 24, right: 100),
       child: Text(
-        'Selamat Datang di Sittok',
+        'Selamat Datang di PDAM Surya Sembada',
         style: TextStyle(
           fontSize: 26,
           fontWeight: FontWeight.bold,

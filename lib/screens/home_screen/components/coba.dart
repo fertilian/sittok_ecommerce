@@ -168,7 +168,7 @@ void _handleNota(String idJual) async {
 
   Widget image(GetKeranjang product) {
     String imagePath =
-        "https://9f20-116-206-40-7.ngrok-free.app/" + product.gambar!;
+        "http://127.0.0.1:8000/" + product.gambar!;
 
     return Positioned(
       left: 16,

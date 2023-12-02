@@ -6,10 +6,8 @@ import 'package:ecommerce_ui/models/model_datakeranjang.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/products.dart';
 import 'package:ecommerce_ui/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -85,7 +83,7 @@ class _DetilBarangState extends State<DetilBarang> {
               topRight: Radius.circular(20),
 
             ),
-            color :  Colors.purple
+            color :  Colors.blueAccent
         ),
         child: IconButton(
           onPressed: () {
@@ -173,7 +171,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget image(GetDetilBarang product) {
     if (product.gambar != null) {
       String imageUrl =
-          "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString();
+          "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString();
       return Container(
         height: 128,
         width: 128,
@@ -195,7 +193,7 @@ class _DetilBarangState extends State<DetilBarang> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString(),
+                  "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString(),
                 ))),
 
       );
@@ -267,7 +265,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget build(BuildContext context) {
     int index;
     String imageUrl =
-        "https://9f20-116-206-40-7.ngrok-free.app/" + widget.notaData.gambar.toString();
+        "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString();
     GetDetilBarang product;
     return Scaffold(
       appBar: appBar(context),

@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SITTOK',
+      title: 'PDAM SURYA SEMBADA',
       theme: ThemeData(
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
@@ -47,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
 
-      home: const LoginScreen(),
+      home: const HomeScreen(),
 
 
     );

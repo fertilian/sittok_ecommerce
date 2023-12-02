@@ -1,11 +1,7 @@
-
-
 import 'dart:io';
-
 import 'package:ecommerce_ui/API/Api_connect.dart';
 import 'package:ecommerce_ui/models/GetTransaksi_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecommerce_ui/BuyScreen/BuyPage.dart';
 import 'package:ecommerce_ui/constants.dart';
 import 'package:ecommerce_ui/models/getDataNota.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/coba.dart';
@@ -204,7 +200,7 @@ void initState() {
             Row(children : [
 
  Image.network(
-      "https://9f20-116-206-40-7.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
+      "https://368e-103-213-128-157.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
       height: 80,
       width: 80,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -366,7 +362,7 @@ setState(() {
 void checkstatus(){
   if(widget.notaData[0].status == 'Belum Bayar'){
     _potoBottomSheet();
-  }else if(widget.notaData[0].status == 'Dikirim'){
+  }else if(widget.notaData[0].status == 'Proses'){
 updateKlaim();
   }else{
 _showImageDialogNot();
@@ -576,7 +572,7 @@ Future<void> _showImageDialog(File? image) async {
 }
 
 Future<void> _showImageDialogNot() async {
-  String imageUrl = 'https://9f20-116-206-40-7.ngrok-free.app' + widget.notaData[0].buktiBayar.toString();
+  String imageUrl = 'https://368e-103-213-128-157.ngrok-free.app' + widget.notaData[0].buktiBayar.toString();
  return  showDialog(
     context: context,
     builder: (context) {

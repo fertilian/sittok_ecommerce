@@ -1,24 +1,18 @@
 import 'dart:convert';
-
 import 'package:ecommerce_ui/SessionManager.dart';
 import 'package:ecommerce_ui/models/GetDetilBarang.dart';
 import 'package:ecommerce_ui/models/GetKategori.dart';
 import 'package:ecommerce_ui/models/model_barang.dart';
 import 'package:ecommerce_ui/models/model_datakeranjang.dart';
-import 'package:ecommerce_ui/models/model_user.dart';
 import 'package:ecommerce_ui/screens/checkout_screen/checkout_screen.dart';
-import 'package:ecommerce_ui/screens/favorite/favorite_screen.dart';
 import 'package:ecommerce_ui/screens/home_screen/components/detail_barang.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../../API/Api_Service.dart';
-
 import 'package:ecommerce_ui/constants.dart';
 import '../../../API/Api_connect.dart';
-import '../../details_screen/details_screen.dart';
 
 class Products extends StatefulWidget {
   final String title;
@@ -193,7 +187,7 @@ class _ProductsState extends State<Products> {
 
   Widget image(Productse product) {
     if (product.gambar != null) {
-      String imageUrl = "https://9f20-116-206-40-7.ngrok-free.app/" +
+      String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
           product.gambar.toString();
       return Container(
         height: 128,
@@ -213,7 +207,7 @@ class _ProductsState extends State<Products> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://9f20-116-206-40-7.ngrok-free.app/" +
+                  "https://368e-103-213-128-157.ngrok-free.app/" +
                       product.gambar.toString(),
                 ))),
         child: text(product),
@@ -241,7 +235,7 @@ class _ProductsState extends State<Products> {
               bottomLeft: Radius.circular(12),
               topRight: Radius.circular(20),
             ),
-            color: Colors.purple),
+            color: Colors.blueAccent),
         child: IconButton(
           onPressed: () {
             setState(() {
@@ -285,7 +279,7 @@ class _ProductsState extends State<Products> {
   }
 
   Widget productItem(BuildContext context, Productse product, int index) {
-    String imageUrl = "https://9f20-116-206-40-7.ngrok-free.app/" +
+    String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
         product.gambar.toString();
     return Stack(
       children: [
@@ -327,7 +321,7 @@ class _ProductsState extends State<Products> {
                     ),
                   ),
                   child: Text(
-                    'Add to Cart',
+                    'Ajukan Sewa',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
