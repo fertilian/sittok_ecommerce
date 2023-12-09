@@ -80,13 +80,13 @@ void initState() {
       children :[
 
         Image.asset(
-    'assets/images/sittoklogo.png',
+    'assets/images/salamberdiri.png',
     width: 44,  // Sesuaikan ukuran gambar
     height: 44,
   ),
   const Spacer(),
       const  Text(
-                 "Daftar Barang",
+                 "Daftar Aset",
                   style:  TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -158,9 +158,9 @@ void initState() {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
-                    return const Center(child: Text('Belum Ada Barang'));
+                    return const Center(child: Text('Belum Ada Aset'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('Belum Ada Barang'));
+                    return const Center(child: Text('Belum Ada Aset'));
                   } else {
                     List<GetNota> products = snapshot.data!;
 
@@ -200,7 +200,7 @@ void initState() {
             Row(children : [
 
  Image.network(
-      "https://368e-103-213-128-157.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
+   "http://192.168.6.51:8000/storage/" + listGetDetail[index].gambar!.toString(),
       height: 80,
       width: 80,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
@@ -572,7 +572,7 @@ Future<void> _showImageDialog(File? image) async {
 }
 
 Future<void> _showImageDialogNot() async {
-  String imageUrl = 'https://368e-103-213-128-157.ngrok-free.app' + widget.notaData[0].buktiBayar.toString();
+  String imageUrl = 'http://192.168.6.51:8000/storage/' + widget.notaData[0].buktiBayar.toString();
  return  showDialog(
     context: context,
     builder: (context) {

@@ -364,7 +364,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
                 child: Column(
                   children: [
                     const Text(
-                      "Daftar Barang",
+                      "Daftar Aset",
                       style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.bold,
@@ -377,7 +377,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
                     Row(
                       children: const [
                         Text(
-                          "Nama Barang",
+                          "Nama Aset",
                           style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
@@ -576,7 +576,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
           "alamat": alamat.text.toString(),
           "nohp": nohp.text.toString(),
           "nama_lengkap": nama_lengkap.text.toString(),
-          "id_customer": idCustomerString,
+          "idCust": idCustomerString,
           "bukti_bayar": "image/no_money.png",
         }).then((response) {
           if (response.statusCode == 200) {
@@ -619,7 +619,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
           "harga": listViews[index].harga.toString(),
           "qty": listViews[index].qty.toString(),
           "total_final": total!.jumlah.toString(),
-          "id_barang": listViews[index].idBarang.toString(),
+          "idAset": listViews[index].idBarang.toString(),
         });
 
         if (response.statusCode == 200) {
@@ -713,7 +713,7 @@ class _BuyBottomNavBarState extends State<BuyBottomNavBar> {
     try {
       for (int index = 0; index < listViews.length; index++) {
         var response = await http.post(Uri.parse(ApiConnect.triger), body: {
-          "id_barang": listViews[index].idBarang.toString(),
+          "idAset": listViews[index].idBarang.toString(),
           "qty": listViews[index].qty
         });
 

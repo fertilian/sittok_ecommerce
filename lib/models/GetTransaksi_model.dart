@@ -35,7 +35,7 @@ class GetTransaksi {
     namaLengkap = json['nama_lengkap'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    idCustomer = json['id_customer'];
+    idCustomer = json['idCust'];
   }
 
   Map<String, dynamic> toJson() {
@@ -50,7 +50,7 @@ class GetTransaksi {
     data['nama_lengkap'] = this.namaLengkap;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['id_customer'] = this.idCustomer;
+    data['idCust'] = this.idCustomer;
     return data;
   }
 }

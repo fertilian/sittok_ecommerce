@@ -21,7 +21,7 @@ class LoginScreenTopImage extends StatelessWidget {
                 width: 200,
                 height: 200,
                 child: Image.asset(
-                  'assets/images/sittoklogo.png',
+                  'assets/images/larikanan.png',
                 ),
               ),
             ),

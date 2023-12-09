@@ -13,7 +13,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:intl/intl.dart';
 
-class ServiceApiBarang {
+class ServiceApiAset {
   late SessionManager _sessionManager;
 
   Future<List<Productse>> getData() async {
@@ -21,8 +21,8 @@ class ServiceApiBarang {
     try {
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
-      final response = await http.post(Uri.parse(ApiConnect.barang), body: {
-        'id_customer': idCustomerString
+      final response = await http.post(Uri.parse(ApiConnect.aset), body: {
+        'idCust': idCustomerString
       });
       if (response.statusCode == 200) {
         print(response.body);
@@ -50,7 +50,7 @@ class ServiceApiFavorit {
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
       final response = await http.post(Uri.parse(ApiConnect.favorit), body: {
-        'id_customer': idCustomerString
+        'idCust': idCustomerString
       });
       if (response.statusCode == 200) {
         print(response.body);
@@ -75,7 +75,7 @@ class TotalService{
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
       final response = await http.post(Uri.parse(ApiConnect.total), body: {
-        'id_customer': idCustomerString
+        'idCust': idCustomerString
       });
       if (response.statusCode == 200) {
         print(response.body);
@@ -93,8 +93,6 @@ class TotalService{
 
 }
 
-
-
 class ServiceApiKeranjang {
   late SessionManager _sessionManager;
 
@@ -104,7 +102,7 @@ class ServiceApiKeranjang {
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
       final response = await http.post(Uri.parse(ApiConnect.keranjang), body: {
-        'id_customer': idCustomerString
+        'idCust': idCustomerString
       });
       if (response.statusCode == 200) {
         print(response.body);
@@ -175,7 +173,7 @@ class ServiceApiGetTrans {
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
       final response = await http.post(Uri.parse(ApiConnect.getjual), body: {
-        'id_customer': idCustomerString
+        'idCust': idCustomerString
       });
       if (response.statusCode == 200) {
         print(response.body);

@@ -37,7 +37,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     } catch (error) {
       // Handle error jika terjadi kesalahan saat mengambil data dari API
       print('Error fetching data: $error');
-      throw Exception('Belum Ada Barang');
+      throw Exception('Belum Ada Aset');
     }
   }
 
@@ -183,7 +183,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
 
   Widget image(GetKeranjang product) {
-    String imagePath = "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar!;
+    String imagePath = "http://192.168.6.51:8000/storage/" + product.gambar!;
 
     return Positioned(
       left: 16,
@@ -203,7 +203,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   Widget item(BuildContext context, GetKeranjang product, int index) {
-    String imagePath = "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar.toString();
+    String imagePath = "http://192.168.6.51:8000/storage/" + product.gambar.toString();
 
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -356,9 +356,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return const Center(child: Text('Belum Ada Barang'));
+            return const Center(child: Text('Belum Ada Aset'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('Belum Ada Barang'));
+            return const Center(child: Text('Belum Ada Aset'));
           } else {
             List<GetKeranjang> products = snapshot.data!;
             Total total = _total; // Use the fetched Total object here
@@ -456,7 +456,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
       final response = await http.post(Uri.parse(ApiConnect.total), body: {
-        'id_customer': idCustomerString
+        'idCust': idCustomerString
       });
 
       if (response.statusCode == 200) {

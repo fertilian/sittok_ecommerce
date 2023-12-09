@@ -171,7 +171,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget image(GetDetilBarang product) {
     if (product.gambar != null) {
       String imageUrl =
-          "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString();
+          "http://192.168.6.51:8000/storage/" + widget.notaData.gambar.toString();
       return Container(
         height: 128,
         width: 128,
@@ -193,7 +193,7 @@ class _DetilBarangState extends State<DetilBarang> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString(),
+                  "http://192.168.6.51:8000/storage/" + widget.notaData.gambar.toString(),
                 ))),
 
       );
@@ -265,7 +265,7 @@ class _DetilBarangState extends State<DetilBarang> {
   Widget build(BuildContext context) {
     int index;
     String imageUrl =
-        "https://368e-103-213-128-157.ngrok-free.app/" + widget.notaData.gambar.toString();
+        "http://192.168.6.51:8000/storage/" + widget.notaData.gambar.toString();
     GetDetilBarang product;
     return Scaffold(
       appBar: appBar(context),
@@ -314,7 +314,7 @@ class _DetilBarangState extends State<DetilBarang> {
                   if (widget.notaData.harga != null)
                     Text(
 
-                      "Haarga : "  + widget.notaData.harga.toString(),
+                      "Harga : "  + widget.notaData.harga.toString(),
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -363,8 +363,8 @@ class _DetilBarangState extends State<DetilBarang> {
     SessionManager.getIdCustomer().then((idCustomer) {
       var idCustomerString = idCustomer?.toString() ?? '';
       http.post(Uri.parse(ApiConnect.add_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": widget.notaData.idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": widget.notaData.idBarang.toString(),
       }).then((response) {
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
@@ -405,8 +405,8 @@ class _DetilBarangState extends State<DetilBarang> {
     SessionManager.getIdCustomer().then((idCustomer) {
       var idCustomerString = idCustomer?.toString() ?? '';
       http.post(Uri.parse(ApiConnect.del_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": widget.notaData.idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": widget.notaData.idBarang.toString(),
       }).then((response) {
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);

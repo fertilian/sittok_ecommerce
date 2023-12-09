@@ -1,4 +1,3 @@
-
 class AddChart {
   String? idCustomer;
   String? idBarang;
@@ -6,32 +5,40 @@ class AddChart {
   String? updatedAt;
   String? createdAt;
   int? idKeranjang;
+  bool success;
+  late String message;
 
-  AddChart(
-      {this.idCustomer,
-        this.idBarang,
-        this.qty,
-        this.updatedAt,
-        this.createdAt,
-        this.idKeranjang});
+  AddChart({
+    this.idCustomer,
+    this.idBarang,
+    this.qty,
+    this.updatedAt,
+    this.createdAt,
+    this.idKeranjang,
+    required this.success,
+  }) : message = ''; // Initializing 'message' with an empty string
 
-  AddChart.fromJson(Map<String, dynamic> json) {
-    idCustomer = json['id_customer'];
-    idBarang = json['id_barang'];
-    qty = json['qty'];
-    updatedAt = json['updated_at'];
-    createdAt = json['created_at'];
-    idKeranjang = json['id_keranjang'];
-  }
+  AddChart.fromJson(Map<String, dynamic> json)
+      : idCustomer = json['idCust'],
+        idBarang = json['idAset'],
+        qty = json['qty'],
+        updatedAt = json['updated_at'],
+        createdAt = json['created_at'],
+        idKeranjang = json['id_keranjang'],
+        success = json['success'] ?? false,
+        message = json['message'] ?? '';
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_customer'] = this.idCustomer;
-    data['id_barang'] = this.idBarang;
-    data['qty'] = this.qty;
-    data['updated_at'] = this.updatedAt;
-    data['created_at'] = this.createdAt;
-    data['id_keranjang'] = this.idKeranjang;
+    final Map<String, dynamic> data = {
+      'idCust': idCustomer,
+      'idAset': idBarang,
+      'qty': qty,
+      'updated_at': updatedAt,
+      'created_at': createdAt,
+      'id_keranjang': idKeranjang,
+      'success': success,
+      'message': message,
+    };
     return data;
   }
 }

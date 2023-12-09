@@ -50,7 +50,7 @@ class _TrackingScreenState extends State<TrackingScreen> {
     } catch (error) {
       // Handle error jika terjadi kesalahan saat mengambil data dari API
       print('Error fetching data: $error');
-      throw Exception('Belum Ada Barang');
+      throw Exception('Belum Ada Aset');
     }
   }
 
@@ -175,7 +175,7 @@ void initState() {
 
   Widget image(GetKeranjang product) {
     String imagePath =
-        "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar!;
+        "https://a4bc-103-213-128-157.ngrok-free.app/" + product.gambar!;
 
     return Positioned(
       left: 16,
@@ -288,7 +288,7 @@ Widget item(BuildContext context, GetTransaksi product, int index) {
 }
 
 Widget listnota(BuildContext context, GetNota product, int index) {
-String imagePath = "https://368e-103-213-128-157.ngrok-free.app/" + product.gambar.toString();
+String imagePath = "https://a4bc-103-213-128-157.ngrok-free.app/" + product.gambar.toString();
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10),
     child: Stack(
@@ -483,9 +483,9 @@ Widget build(BuildContext context) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else {
           List<GetTransaksi> products = snapshot.data!;
           Jual jual = Jual(); // Inisialisasi objek Jual
@@ -546,7 +546,7 @@ total = Total();
     var idCustomer = await SessionManager.getIdCustomer();
     var idCustomerString = idCustomer?.toString() ?? '';
     final response = await http.post(Uri.parse(ApiConnect.total), body: {
-      'id_customer': idCustomerString
+      'idCust': idCustomerString
     });
 
     if (response.statusCode == 200) {
@@ -670,9 +670,9 @@ child:  Scaffold(
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else {
           List<GetNota> products = snapshot.data!;
           
@@ -708,7 +708,7 @@ child:  Scaffold(
             Row(children : [
 
  Image.network(
-      "https://368e-103-213-128-157.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
+      "https://a4bc-103-213-128-157.ngrok-free.app/" + listGetDetail[index].gambar!.toString(),
       height: 80,
       width: 80,
       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {

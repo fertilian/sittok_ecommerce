@@ -80,7 +80,7 @@ class _BuyItemSamplesState extends State<BuyItemSamples> {
                       width: 70,
                       margin: EdgeInsets.only(right: 15),
                       child: Image.network(
-                        "https://368e-103-213-128-157.ngrok-free.app/" +
+                        "http://192.168.6.51:8000/storage/" +
                             products[index].icon.toString(),
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {

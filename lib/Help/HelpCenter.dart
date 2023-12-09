@@ -20,14 +20,14 @@ class HelpCenter extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.blueAccent,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text(
-              'Selamat datang di Help Center Sittok.',
+              'Selamat datang di Help Center PDAM Surya Sembada.',
               style: TextStyle(
                 fontSize: 20.0,
                 letterSpacing: 1.0,
@@ -84,7 +84,7 @@ class HelpCenter extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.link),
               onPressed: () {
-                launch("https://instagram.com/inisittok?igshid=OGQ5ZDc2ODk2ZA==");
+                launch("https://instagram.com/pdamsuryasembada?igshid=OGQ5ZDc2ODk2ZA==");
               },
             ),
             const Spacer(),

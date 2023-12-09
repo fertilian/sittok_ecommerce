@@ -6,8 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SessionManager {
   static const String KEY_USER_DATA = 'user_data';
   static const String KEY_LOGGED_IN = 'logged_in';
-  static const String KEY_ID_CUSTOMER = 'id_customer';
-  static const String KEY_GAMBAR = 'profil';
+  static const String KEY_ID_CUSTOMER = 'idCust';
+  static const String KEY_GAMBAR = 'gambar';
 
   static Future<void> saveUserData(Users user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

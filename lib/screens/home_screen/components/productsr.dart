@@ -27,7 +27,7 @@ class _ProductsState extends State<Productsr> {
 
   Future<List<Productse>> fetchData() async {
     try {
-      List<Productse> data = await ServiceApiBarang().getData();
+      List<Productse> data = await ServiceApiAset().getData();
       setState(() {
         listViews = data;
       });
@@ -107,7 +107,7 @@ class _ProductsState extends State<Productsr> {
 
   Widget image(Productse product) {
     if (product.gambar != null) {
-      String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+      String imageUrl = "http://192.168.6.51:8000/storage/" +
           product.gambar.toString();
       return Container(
         height: 148,
@@ -127,8 +127,8 @@ class _ProductsState extends State<Productsr> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://368e-103-213-128-157.ngrok-free.app/" +
-                      product.gambar.toString(),
+                  "http://192.168.6.51:8000/storage/" +
+                product.gambar.toString(),
                 ))),
         child: text(product),
       );
@@ -163,7 +163,7 @@ class _ProductsState extends State<Productsr> {
   }
 
   Widget productItem(BuildContext context, Productse product) {
-    String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+    String imageUrl = "http://192.168.6.51:8000/storage/" +
         product.gambar.toString();
     return Stack(
       children: [
@@ -185,7 +185,7 @@ class _ProductsState extends State<Productsr> {
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
-                      "https://368e-103-213-128-157.ngrok-free.app/" +
+                      "http://192.168.6.51:8000/storage/" +
                           product.gambar.toString(),
                     ))),
             child: Column(

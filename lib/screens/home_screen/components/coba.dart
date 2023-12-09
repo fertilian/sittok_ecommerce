@@ -50,7 +50,7 @@ class _TrackingScreenState extends State<TrackingScreens> {
     } catch (error) {
       // Handle error jika terjadi kesalahan saat mengambil data dari API
       print('Error fetching data: $error');
-      throw Exception('Belum Ada Barang');
+      throw Exception('Belum Ada Aset');
     }
   }
 @override
@@ -168,8 +168,7 @@ void _handleNota(String idJual) async {
 
   Widget image(GetKeranjang product) {
     String imagePath =
-        "http://127.0.0.1:8000/" + product.gambar!;
-
+        "http://192.168.6.51:8000/storage/" + product.gambar!;
     return Positioned(
       left: 16,
       bottom: 2,
@@ -303,9 +302,9 @@ Widget build(BuildContext context) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('Belum Ada Barang'));
+          return const Center(child: Text('Belum Ada Aset'));
         } else {
           List<GetTransaksi> products = snapshot.data!;
           Jual jual = Jual(); // Inisialisasi objek Jual

@@ -21,26 +21,26 @@ class Triger {
       this.updatedAt});
 
   Triger.fromJson(Map<String, dynamic> json) {
-    idBarang = json['id_barang'];
-    merkBarang = json['merk_barang'];
-    jumlahBarang = json['jumlah_barang'];
+    idBarang = json['idAset'];
+    merkBarang = json['nama_aset'];
+    jumlahBarang = json['jumlah_aset'];
     harga = json['harga'];
     deskripsi = json['deskripsi'];
     gambar = json['gambar'];
-    idKategori = json['id_kategori'];
+    idKategori = json['idKategori'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_barang'] = this.idBarang;
-    data['merk_barang'] = this.merkBarang;
-    data['jumlah_barang'] = this.jumlahBarang;
+    data['idAset'] = this.idBarang;
+    data['nama_aset'] = this.merkBarang;
+    data['jumlah_aset'] = this.jumlahBarang;
     data['harga'] = this.harga;
     data['deskripsi'] = this.deskripsi;
     data['gambar'] = this.gambar;
-    data['id_kategori'] = this.idKategori;
+    data['idKategori'] = this.idKategori;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

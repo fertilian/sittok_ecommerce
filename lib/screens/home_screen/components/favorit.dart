@@ -175,7 +175,7 @@ class _ProductsState extends State<ProductF> {
 
   Widget image(GetDataFav product) {
     if (product.gambar != null) {
-      String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+      String imageUrl = "http://192.168.6.51:8000/storage/" +
           product.gambar.toString();
       return Container(
         height: 128,
@@ -195,7 +195,7 @@ class _ProductsState extends State<ProductF> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://368e-103-213-128-157.ngrok-free.app/" +
+                  "http://192.168.6.51:8000/storage/" +
                       product.gambar.toString(),
                 ))),
         child: text(product),
@@ -267,7 +267,7 @@ class _ProductsState extends State<ProductF> {
   }
 
   Widget productItem(BuildContext context, GetDataFav product, int index) {
-    String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+    String imageUrl = "http://192.168.6.51:8000/storage/" +
         product.gambar.toString();
     return Stack(
       children: [
@@ -418,8 +418,8 @@ class _ProductsState extends State<ProductF> {
       var idCustomerString = idCustomer?.toString() ?? '';
 
       http.post(Uri.parse(ApiConnect.add_datakeranjang), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
         "qty": "1".toString(),
       }).then((response) {
         if (response.statusCode == 200) {
@@ -460,8 +460,8 @@ class _ProductsState extends State<ProductF> {
       var idCustomerString = idCustomer?.toString() ?? '';
 
       http.post(Uri.parse(ApiConnect.add_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
       }).then((response) {
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
@@ -501,8 +501,8 @@ class _ProductsState extends State<ProductF> {
       var idCustomerString = idCustomer?.toString() ?? '';
 
       http.post(Uri.parse(ApiConnect.del_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
       }).then((response) {
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
@@ -579,7 +579,7 @@ class ServiceApiDetilBarang {
     try {
       final response =
       await http.post(Uri.parse(ApiConnect.detilbarang), body: {
-        "id_barang": idBarang,
+        "idAset": idBarang,
       });
       if (response.statusCode == 200) {
         print(response.body);

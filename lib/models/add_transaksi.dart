@@ -28,7 +28,7 @@ class AddTransaksi {
     alamat = json['alamat'];
     nohp = json['nohp'];
     namaLengkap = json['nama_lengkap'];
-    idCustomer = json['id_customer'];
+    idCustomer = json['idCust'];
     status = json['status'];
     updatedAt = json['updated_at'];
     createdAt = json['created_at'];
@@ -42,7 +42,7 @@ class AddTransaksi {
     data['alamat'] = this.alamat;
     data['nohp'] = this.nohp;
     data['nama_lengkap'] = this.namaLengkap;
-    data['id_customer'] = this.idCustomer;
+    data['idCust'] = this.idCustomer;
     data['status'] = this.status;
     data['updated_at'] = this.updatedAt;
     data['created_at'] = this.createdAt;

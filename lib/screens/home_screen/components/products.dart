@@ -39,19 +39,23 @@ class _ProductsState extends State<Products> {
 
   Future<List<Productse>> fetchData() async {
     try {
-      List<Productse> data = await ServiceApiBarang().getData();
-      List<Kategori> kategori = await ServiceApiKategori().getData();
+      // Ambil data dari ServiceApiAset
+      List<Productse> responseData = await ServiceApiAset().getData();
+
+      // Setel state dan kembalikan data
       setState(() {
-        listViews = data;
-        originalListViews = List.from(data); // Salin data ke originalListViews
-        isLiked = Map<int, bool>.fromIterable(data,
+        listViews = responseData;
+        originalListViews = List.from(listViews);
+        isLiked = Map<int, bool>.fromIterable(listViews,
             key: (e) => e.idBarang, value: (e) => e.isLiked);
       });
-      return data;
+
+      // Kembalikan data yang berhasil diambil
+      return listViews;
     } catch (error) {
-      // Handle error jika terjadi kesalahan saat mengambil data dari API
-      print('Error fetching data: $error');
-      throw Exception('Failed to load data');
+      // Tangkap dan cetak pesan kesalahan, lalu lempar pengecualian
+      print('Error fetching dataaaa: $error');
+      throw Exception('Failed to load daaaata');
     }
   }
 
@@ -187,7 +191,7 @@ class _ProductsState extends State<Products> {
 
   Widget image(Productse product) {
     if (product.gambar != null) {
-      String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+      String imageUrl = "http://192.168.6.51:8000/storage/" +
           product.gambar.toString();
       return Container(
         height: 128,
@@ -207,7 +211,7 @@ class _ProductsState extends State<Products> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  "https://368e-103-213-128-157.ngrok-free.app/" +
+                  "http://192.168.6.51:8000/storage/" +
                       product.gambar.toString(),
                 ))),
         child: text(product),
@@ -279,7 +283,7 @@ class _ProductsState extends State<Products> {
   }
 
   Widget productItem(BuildContext context, Productse product, int index) {
-    String imageUrl = "https://368e-103-213-128-157.ngrok-free.app/" +
+    String imageUrl = "http://192.168.6.51:8000/storage/" +
         product.gambar.toString();
     return Stack(
       children: [
@@ -428,84 +432,85 @@ class _ProductsState extends State<Products> {
   Future<void> _handleAdddatakeranjang(BuildContext context, int index) async {
     _sessionManager = SessionManager();
 
-    SessionManager.getIdCustomer().then((idCustomer) {
+    try {
+      var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
 
-      http.post(Uri.parse(ApiConnect.add_datakeranjang), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
-        "qty": "1".toString(),
-      }).then((response) {
-        if (response.statusCode == 200) {
-          final jsonData = jsonDecode(response.body);
-          final add_datakeranjang = AddChart.fromJson(jsonData);
-          if (response.statusCode == 200) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => CheckoutScreen()),
-            );
-          } else {
-            Fluttertoast.showToast(
-              msg: "Data Gagal masuk Keranjang",
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 12,
-            );
-          }
+      final response = await http.post(Uri.parse(ApiConnect.add_datakeranjang), body: {
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
+        "qty": "1",
+      });
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        final add_datakeranjang = AddChart.fromJson(jsonData);
+
+        if (add_datakeranjang.success) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => CheckoutScreen()),
+          );
         } else {
           Fluttertoast.showToast(
-            msg: idCustomerString,
+            msg: add_datakeranjang.message ?? "Data Gagal masuk Keranjang",
             backgroundColor: Colors.red,
             textColor: Colors.white,
             fontSize: 12,
           );
         }
-      }).catchError((error) {
-        // Handle error
-        print('Error: $error');
-      });
-    });
+      } else {
+        Fluttertoast.showToast(
+          msg: "Gagal",
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 12,
+        );
+      }
+    } catch (error) {
+      // Handle error
+      print('Error: $error');
+      Fluttertoast.showToast(
+        msg: "Terjadi kesalahan",
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 12,
+      );
+    }
   }
 
   Future<void> _handleAdddatafavorit(BuildContext context, int index) async {
     _sessionManager = SessionManager();
 
-    SessionManager.getIdCustomer().then((idCustomer) {
+    try {
+      var idCustomer = await SessionManager.getIdCustomer();
       var idCustomerString = idCustomer?.toString() ?? '';
 
-      http.post(Uri.parse(ApiConnect.add_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
-      }).then((response) {
-        if (response.statusCode == 200) {
-          final jsonData = jsonDecode(response.body);
-          final add_datafavorit = AddChart.fromJson(jsonData);
-          if (response.statusCode == 200) {
-            // Set status favorit menjadi true jika berhasil
-            setState(() {
-              isLiked[index] = true;
-            });
-          } else {
-            Fluttertoast.showToast(
-              msg: "Data Gagal masuk Keranjang",
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 12,
-            );
-          }
-        } else {
-          Fluttertoast.showToast(
-            msg: idCustomerString,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 12,
-          );
-        }
-      }).catchError((error) {
-        // Handle error
-        print('Error: $error');
+      final response = await http.post(Uri.parse(ApiConnect.add_datafavorit), body: {
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
       });
-    });
+
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        final add_datafavorit = AddChart.fromJson(jsonData);
+
+        // Set status favorit menjadi true jika berhasil
+        setState(() {
+          isLiked[index] = true;
+        });
+      } else {
+        Fluttertoast.showToast(
+          msg: "Data Gagal masuk Keranjang",
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 12,
+        );
+      }
+    } catch (error) {
+      // Handle error
+      print('Error: $error');
+    }
   }
 
   Future<void> _handledeleteData(BuildContext context, int index) async {
@@ -515,8 +520,8 @@ class _ProductsState extends State<Products> {
       var idCustomerString = idCustomer?.toString() ?? '';
 
       http.post(Uri.parse(ApiConnect.del_datafavorit), body: {
-        "id_customer": idCustomerString,
-        "id_barang": listViews[index].idBarang.toString(),
+        "idCust": idCustomerString,
+        "idAset": listViews[index].idBarang.toString(),
       }).then((response) {
         if (response.statusCode == 200) {
           final jsonData = jsonDecode(response.body);
@@ -593,7 +598,7 @@ class ServiceApiDetilBarang {
     try {
       final response =
       await http.post(Uri.parse(ApiConnect.detilbarang), body: {
-        "id_barang": idBarang,
+        "idAset": idBarang,
       });
       if (response.statusCode == 200) {
         print(response.body);

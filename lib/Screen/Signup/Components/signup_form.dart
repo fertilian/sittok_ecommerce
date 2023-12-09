@@ -131,10 +131,10 @@ class SignUpForm extends StatelessWidget {
   Future<void> _handleRegister(BuildContext context) async {
     try {
       var response = await http.post(Uri.parse(ApiConnect.register), body: {
-        "email": email.text.toString(),
-        "password": password.text.toString(),
-        "nama_customer": nama_customer.text.toString(),
-        "no_telp_customer": no_telp_customer.text.toString(),
+        "email_Custt": email.text.toString(),
+        "password_Cust": password.text.toString(),
+        "namaCust": nama_customer.text.toString(),
+        "no_telp": no_telp_customer.text.toString(),
         "alamat" :alamat.text.toString()
       });
 

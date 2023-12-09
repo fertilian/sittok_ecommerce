@@ -16,8 +16,8 @@ class AddQty {
 
   AddQty.fromJson(Map<String, dynamic> json) {
     idKeranjang = json['id_keranjang'];
-    idCustomer = json['id_customer'];
-    idBarang = json['id_barang'];
+    idCustomer = json['idCust'];
+    idBarang = json['idAset'];
     qty = json['qty'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -26,8 +26,8 @@ class AddQty {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id_keranjang'] = this.idKeranjang;
-    data['id_customer'] = this.idCustomer;
-    data['id_barang'] = this.idBarang;
+    data['idCust'] = this.idCustomer;
+    data['idAset'] = this.idBarang;
     data['qty'] = this.qty;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

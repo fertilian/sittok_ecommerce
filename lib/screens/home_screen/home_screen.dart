@@ -104,7 +104,7 @@ class _FragmentBerandaState extends State<FragmentBeranda> {
   }
 
   void fetchData() async {
-    List<Productse> products = await ServiceApiBarang().getData();
+    List<Productse> products = await ServiceApiAset().getData();
     setState(() {
       data = products;
     });
@@ -158,7 +158,7 @@ class _FragmentBerandaState extends State<FragmentBeranda> {
                 // Tindakan yang dijalankan saat gambar di-tap
               },
               child: Image.asset(
-                'assets/images/sittoklogo.png',
+                'assets/images/salamberdiri.png',
                 width: 44, // Sesuaikan ukuran gambar
                 height: 44,
               ),
@@ -230,7 +230,7 @@ class _FragmentBerandaState extends State<FragmentBeranda> {
 
   Widget gass() {
     return FutureBuilder<List<Productse>>(
-      future: ServiceApiBarang().getData(),
+      future: ServiceApiAset().getData(),
       builder: (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -306,7 +306,7 @@ class FragmentP extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<List<Productse>>(
-        future: ServiceApiBarang().getData(),
+        future: ServiceApiAset().getData(),
         builder:
             (BuildContext context, AsyncSnapshot<List<Productse>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

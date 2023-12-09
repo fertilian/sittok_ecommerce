@@ -63,19 +63,19 @@ class GetNota {
     buktiBayar = json['bukti_bayar'];
     status = json['status'];
     namaLengkap = json['nama_lengkap'];
-    idCustomer = json['id_customer'];
-    merkBarang = json['merk_barang'];
-    jumlahBarang = json['jumlah_barang'];
+    idCustomer = json['idCust'];
+    merkBarang = json['nama_aset'];
+    jumlahBarang = json['jumlah_aset'];
     deskripsi = json['deskripsi'];
     gambar = json['gambar'];
-    idKategori = json['id_kategori'];
+    idKategori = json['idKategori'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id_detil_jual'] = this.idDetilJual;
     data['id_jual'] = this.idJual;
-    data['id_barang'] = this.idBarang;
+    data['idAset'] = this.idBarang;
     data['id_keranjang'] = this.idKeranjang;
     data['jumlah'] = this.jumlah;
     data['harga'] = this.harga;
@@ -89,12 +89,12 @@ class GetNota {
     data['bukti_bayar'] = this.buktiBayar;
     data['status'] = this.status;
     data['nama_lengkap'] = this.namaLengkap;
-    data['id_customer'] = this.idCustomer;
-    data['merk_barang'] = this.merkBarang;
-    data['jumlah_barang'] = this.jumlahBarang;
+    data['idCust'] = this.idCustomer;
+    data['nama_aset'] = this.merkBarang;
+    data['jumlah_aset'] = this.jumlahBarang;
     data['deskripsi'] = this.deskripsi;
     data['gambar'] = this.gambar;
-    data['id_kategori'] = this.idKategori;
+    data['idKategori'] = this.idKategori;
     return data;
   }
 }

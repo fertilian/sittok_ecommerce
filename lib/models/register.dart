@@ -37,19 +37,19 @@ class Data {
         this.alamat});
 
   Data.fromJson(Map<String, dynamic> json) {
-    idCustomer = json['id_customer'];
-    namaCustomer = json['nama_customer'];
-    email = json['email'];
-    noTelpCustomer = json['no_telp_customer'];
+    idCustomer = json['idCust'];
+    namaCustomer = json['namaCust'];
+    email = json['email_Cust'];
+    noTelpCustomer = json['no_telp'];
     alamat = json['alamat'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_customer'] = this.idCustomer;
-    data['nama_customer'] = this.namaCustomer;
-    data['email'] = this.email;
-    data['no_telp_customer'] = this.noTelpCustomer;
+    data['idCust'] = this.idCustomer;
+    data['namaCust'] = this.namaCustomer;
+    data['email_Cust'] = this.email;
+    data['no_telp'] = this.noTelpCustomer;
     data['alamat'] = this.alamat;
     return data;
   }
